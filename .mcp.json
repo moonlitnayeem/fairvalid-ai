@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "fairvalid": {
+      "type": "http",
+      "url": "https://mcp.fairvalid.com/mcp"
+    }
+  }
+}

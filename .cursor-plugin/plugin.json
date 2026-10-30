@@ -1,0 +1,11 @@
+{
+  "name": "fairvalid",
+  "version": "1.0.0",
+  "description": "Verify email addresses, follow verification jobs, and review results and credit balances in your FairValid workspace.",
+  "author": { "name": "FairValid", "email": "nayeem@fairvalid.com" },
+  "homepage": "https://fairvalid.com/help/mcp",
+  "repository": "https://github.com/moonlitnayeem/fairvalid-ai",
+  "license": "MIT",
+  "keywords": ["email", "email-verification", "deliverability", "fairvalid", "mcp"],
+  "logo": "assets/fairvalid-icon.svg"
+}

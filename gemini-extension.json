@@ -1,0 +1,10 @@
+{
+  "name": "fairvalid",
+  "version": "1.0.0",
+  "description": "Verify email addresses, follow verification jobs, and review results and credit balances in your FairValid workspace.",
+  "mcpServers": {
+    "fairvalid": {
+      "httpUrl": "https://mcp.fairvalid.com/mcp"
+    }
+  }
+}

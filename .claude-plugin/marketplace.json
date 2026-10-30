@@ -1,0 +1,16 @@
+{
+  "name": "fairvalid",
+  "description": "FairValid email verification tools and workflows for AI assistants.",
+  "owner": {
+    "name": "FairValid",
+    "email": "nayeem@fairvalid.com"
+  },
+  "plugins": [
+    {
+      "name": "fairvalid",
+      "source": "./",
+      "description": "Email verification and results for your FairValid workspace.",
+      "version": "1.0.0"
+    }
+  ]
+}

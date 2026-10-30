@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "fairvalid": {
+      "type": "streamableHttp",
+      "url": "https://mcp.fairvalid.com/mcp",
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
