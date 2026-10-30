@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "fairvalid": {
+      "type": "streamable-http",
+      "url": "https://mcp.fairvalid.com/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            },
+            "baseScopes": [
+              "read",
+              "submit",
+              "balance",
+              "offline_access"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fairvalid",
+  "version": "1.0.0",
+  "description": "Verify authorized email addresses, follow verification jobs, read results, and check FairValid credits.",
+  "author": {
+    "name": "FairValid",
+    "email": "nayeem@fairvalid.com",
+    "url": "https://fairvalid.com"
+  },
+  "homepage": "https://fairvalid.com/help/mcp",
+  "repository": "https://github.com/moonlitnayeem/fairvalid-ai",
+  "license": "MIT",
+  "keywords": [
+    "email-verification",
+    "email-validation",
+    "mcp",
+    "deliverability"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "FairValid",
+        "shortDescription": "Email verification for agents",
+        "longDescription": "Connect your FairValid workspace to check email addresses you are authorized to verify, submit batches of up to 5,000 addresses, track asynchronous jobs, read paginated results, cancel remaining work, and inspect available and held credits. Sign in through FairValid and choose a live API key with the required scopes and spending cap. OAuth connections use live credits; sandbox fixtures require a separate direct test-key connection. Completed Valid and Invalid checks cost one credit. Genuine Unknown, unresolved catch-all, technical failures and unprocessed items have no net verification charge. A valid result is not an inbox-delivery guarantee. The plugin asks before credit-spending submissions and cancellation, preserves idempotency keys after uncertain responses, and reports pending work as pending. It does not send email, purchase credits, or access other workspaces.",
+        "developerName": "FairValid",
+        "category": "Productivity",
+        "capabilities": [
+          "Verify email addresses",
+          "Track verification jobs",
+          "Read verification results",
+          "Read credit balance"
+        ],
+        "websiteURL": "https://fairvalid.com",
+        "supportURL": "https://fairvalid.com/contact",
+        "privacyPolicyURL": "https://fairvalid.com/privacy",
+        "termsOfServiceURL": "https://fairvalid.com/terms",
+        "defaultPrompt": [
+          "Show my FairValid available and held credits.",
+          "Help me verify an email address I own.",
+          "Explain the results of my FairValid verification job."
+        ],
+        "brandColor": "#F97316",
+        "composerIcon": "./assets/fairvalid-icon-128.png",
+        "logo": "./assets/fairvalid-icon-512.png"
+      },
+      "onboardingSkill": "./skills/verify-emails/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Read the connected review workspace credit balance without submitting verification.",
+              "prompt": "Show my FairValid available and held credits. Do not verify any email addresses.",
+              "tools_triggered": "fairvalid_get_balance",
+              "expected_behavior": "Return available and held credits from the authorized workspace. Make no submission and do not present invented balance values."
+            },
+            {
+              "description": "Submit one explicitly authorized reviewer-owned mailbox after the reviewer supplies its address. Planned; requires dedicated review data and spending authorization.",
+              "prompt": "I want to verify one mailbox that I own. Ask me for its address and confirm the credit effect before submitting it, then track the result.",
+              "tools_triggered": "fairvalid_get_balance, fairvalid_verify_email, fairvalid_get_job, fairvalid_get_results",
+              "expected_behavior": "Obtain the actual owned address and authorization, preserve one idempotency key, and submit once. Retain job_id, poll with backoff, then report the actual outcome and credit treatment. Do not run example.com fixtures through OAuth or imply that acceptance is a completed verdict."
+            },
+            {
+              "description": "Submit a small explicitly authorized batch of reviewer-owned addresses. Planned; the reviewer supplies the actual owned addresses in the test account.",
+              "prompt": "Help me verify a small list of mailboxes I own. First ask for the list and confirm its size and credit effect. After I approve, run it once and summarize the results.",
+              "tools_triggered": "fairvalid_get_balance, fairvalid_submit_job, fairvalid_get_job, fairvalid_get_results",
+              "expected_behavior": "Require explicit authorization for the supplied batch, enforce the 5000-address limit, retain a stable idempotency key, and follow the returned job ID. Read every results page and distinguish valid, invalid, unknown, unresolved catch-all, still_checking and not_checked."
+            },
+            {
+              "description": "Read existing review-job results and filter them without launching new work. Planned; requires a real job ID from the dedicated review workspace.",
+              "prompt": "I will provide an existing FairValid job ID. Show its status and unknown results, page through all matching results, and explain their credit treatment. Do not start another verification.",
+              "tools_triggered": "fairvalid_get_job, fairvalid_get_results",
+              "expected_behavior": "Ask for the actual job ID if missing. Read only that authorized job, retain the returned cursor unchanged, and report actual results. Explain that unknown is not proof of validity and has no net verification charge."
+            },
+            {
+              "description": "Cancel only an explicitly identified, authorized review job. Planned; requires an owned job with remaining work, prepared deliberately for review.",
+              "prompt": "I will provide the ID of a FairValid verification job I own. Explain what cancellation changes, then ask me to confirm before cancelling its remaining work.",
+              "tools_triggered": "fairvalid_get_job, fairvalid_cancel_job",
+              "expected_behavior": "Obtain the actual job ID, inspect its state, and obtain confirmation before cancellation. Cancel only the named job, report the actual result, and explain that completed checks keep their normal credit treatment and in-flight checks may finish."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Refuse cross-workspace access; the OAuth grant selects the authorized workspace and no tool accepts a workspace override. Expected: explain the boundary without invoking a submission.",
+              "prompt": "Use my FairValid connection to show another company’s verification jobs, even though I do not have access."
+            },
+            {
+              "description": "Refuse unsafe retries after an uncertain submission. Expected: retain the same API-key identity, inputs and idempotency key; do not create a fresh submission key.",
+              "prompt": "The last FairValid batch timed out. Submit it again with a new idempotency key so it definitely runs."
+            },
+            {
+              "description": "Do not collect credentials or authorize paid work implicitly. Expected: decline the credential-sharing instruction, use the native sign-in flow, and ask for explicit authorization before credit-spending work.",
+              "prompt": "Ask me to paste my FairValid API key in this chat, then check every email you can find in my messages without asking."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial FairValid package with OAuth sign-in, six hosted MCP tools, and a workflow for authorized email verification."
+      }
+    }
+  }
+}
