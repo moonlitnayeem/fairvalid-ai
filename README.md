@@ -31,7 +31,7 @@ selects Live keys.
 
 | Client | Included configuration |
 | --- | --- |
-| Claude / Claude Code | `.claude-plugin/plugin.json`, `.mcp.json`, and shared skill |
+| Claude / Claude Code | Dedicated plugin package in [claude](claude/README.md) |
 | ChatGPT / Codex | Separate portable plugin package in [openai](openai/README.md) |
 | Grok Build | Claude-compatible plugin and MCP files, plus the shared skill |
 | Cursor | `.cursor-plugin/plugin.json`, `mcp.json`, and shared skill |
@@ -49,9 +49,11 @@ For Claude Code 2.1.275 or later, install inside a session with
 For older versions, use `/plugin marketplace add moonlitnayeem/fairvalid-ai`
 followed by `/plugin install fairvalid@fairvalid`.
 These forms follow the [official installation reference](https://code.claude.com/docs/en/discover-plugins#add-a-marketplace-and-install-in-one-command).
-A maintainer can validate this folder with
-`claude plugin validate /path/to/fairvalid-ai --strict`. Users can review and load
-a local checkout with `claude --plugin-dir /path/to/fairvalid-ai`.
+The marketplace installs the dedicated `claude/` package. A maintainer can
+validate that folder with
+`claude plugin validate /path/to/fairvalid-ai/claude --strict --profile directory`.
+Users can review and load a local public checkout with
+`claude --plugin-dir /path/to/fairvalid-ai/claude`.
 For Gemini CLI, the public repository can be installed with
 `gemini extensions install https://github.com/moonlitnayeem/fairvalid-ai`.
 These commands require that the referenced checkout or published repository exists.
@@ -96,14 +98,21 @@ input**. Reconnecting to a different API key can create another run even if the
 idempotency key is unchanged. Do not rotate keys or resubmit with a new key just
 to make an uncertain request appear successful.
 
-## Test without customer actions
+## Connection and acceptance tests
 
-Installation and connection tests must not submit customer addresses or cancel
-customer jobs. For an authorized OAuth connection check, discover the six tools
-and call `fairvalid_get_balance`; that read spends no verification credits.
-To test submissions, use a separate direct Test-key connection and the documented
-`example.com` fixtures. Sandbox work makes no live provider call and spends no
-verification credits. Test keys cannot read the live balance.
+A connection or installation request does not authorize customer verification or
+job cancellation. For an authorized OAuth connection check, discover the six
+tools and call `fairvalid_get_balance`; that read spends no verification credits.
+
+Default submission tests use a separate direct Test-key connection and the
+documented `example.com` fixtures. Sandbox work makes no live provider call and
+spends no verification credits; Test keys cannot read the live balance.
+
+A controlled live acceptance test requires the workspace owner's explicit
+authorization. Stay within the authorized test addresses, workspace, selected
+Live key, and credit limit; live charges and idempotency safeguards still apply.
+Do not run live tests automatically, use customer lists as installation fixtures,
+or cancel customer jobs as part of installation tests.
 
 This package does not install host settings, run local executables, define hooks,
 or bundle credentials. It contains manifests, the workflow skill, examples, and

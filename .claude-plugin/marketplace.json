@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "fairvalid",
-      "source": "./",
+      "source": "./claude",
       "description": "Email verification and results for your FairValid workspace.",
       "version": "1.0.0"
     }
