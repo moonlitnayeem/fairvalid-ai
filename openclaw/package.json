@@ -1,0 +1,15 @@
+{
+  "name": "fairvalid",
+  "version": "1.0.0",
+  "description": "Email verification, job results, and credit balances through FairValid's remote MCP server.",
+  "license": "MIT",
+  "homepage": "https://fairvalid.com/help/mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moonlitnayeem/fairvalid-ai"
+  },
+  "author": {
+    "name": "FairValid",
+    "email": "nayeem@fairvalid.com"
+  }
+}

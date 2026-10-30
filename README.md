@@ -32,9 +32,12 @@ selects Live keys.
 | Client | Included configuration |
 | --- | --- |
 | Claude / Claude Code | `.claude-plugin/plugin.json`, `.mcp.json`, and shared skill |
+| ChatGPT / Codex | Separate portable plugin package in [openai](openai/README.md) |
 | Grok Build | Claude-compatible plugin and MCP files, plus the shared skill |
 | Cursor | `.cursor-plugin/plugin.json`, `mcp.json`, and shared skill |
 | Gemini CLI | Root `gemini-extension.json` and shared skill |
+| Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
+| OpenClaw | Separate Claude-format bundle in [openclaw](openclaw/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
 Package configuration does not establish a marketplace listing or prove a

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "fairvalid": {
+      "url": "https://mcp.fairvalid.com/mcp",
+      "transport": "streamable-http",
+      "auth": "oauth",
+      "toolFilter": {
+        "include": [
+          "fairvalid_get_balance",
+          "fairvalid_get_job",
+          "fairvalid_get_results"
+        ]
+      }
+    }
+  }
+}
