@@ -1,0 +1,6 @@
+/target/
+/extension.wasm
+/node_modules/
+/package.json
+/package-lock.json
+/fairvalid-oauth/

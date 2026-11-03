@@ -38,6 +38,7 @@ selects Live keys.
 | Gemini CLI | Root `gemini-extension.json` and shared skill |
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
 | OpenClaw | Separate Claude-format bundle in [openclaw](openclaw/README.md) |
+| Zed | Local transport extension and connection instructions in [zed](zed/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
 Package configuration does not establish a marketplace listing or prove a
@@ -114,11 +115,13 @@ Live key, and credit limit; live charges and idempotency safeguards still apply.
 Do not run live tests automatically, use customer lists as installation fixtures,
 or cancel customer jobs as part of installation tests.
 
-This package does not install host settings, run local executables, define hooks,
-or bundle credentials. It contains manifests, the workflow skill, examples, and
-brand assets. Client validation, live protocol checks, and native client tests
-must each be recorded according to what was actually performed; none implies a
-provider's approval or publication. See the [static validation record](VALIDATION.md).
+The packages contain manifests, the workflow skill, examples, and brand assets.
+The optional [Zed extension](zed/README.md) also downloads and runs a pinned local
+transport bridge and stores OAuth credentials in its extension work directory.
+No credentials are bundled. Client validation, live protocol checks, and native
+client tests must each be recorded according to what was actually performed;
+none implies a provider's approval or publication. See the
+[static validation record](VALIDATION.md).
 
 ## Privacy policy
 
@@ -127,7 +130,8 @@ job identifiers, and other tool arguments to FairValid. FairValid processes them
 under its [Privacy Policy](https://fairvalid.com/privacy) and
 [Terms](https://fairvalid.com/terms). The AI provider also processes conversation
 and tool data under its own terms. Review those policies before connecting.
-The package itself adds no analytics, local database, or extra data destination.
+The packages add no analytics. The Zed extension's local OAuth storage is described
+in its [connection instructions](zed/README.md#local-oauth-storage).
 For support or data-handling questions, contact
 [nayeem@fairvalid.com](mailto:nayeem@fairvalid.com).
 
