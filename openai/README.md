@@ -1,6 +1,6 @@
 # FairValid for ChatGPT and Codex
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **OpenAI package 1.1.1 / FairValid runtime 1.1.0:** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -20,7 +20,14 @@ permissions, and spending cap. OAuth does not provide sandbox mode.
 
 ## Package status
 
-The eight positive and five negative cases in `plugin.json` are planned reviewer
+OpenAI package 1.1.1 is a review-metadata compatibility patch: the live importer
+requires exactly five positive and three negative scenarios. The scenarios group
+all twelve tools while retaining separate spend and cancellation confirmations.
+The listing description omits pricing; functional credit controls remain in the
+skills and review cases. Runtime, OAuth scopes and other provider packages remain
+at the accepted 1.1.0 release.
+
+The five positive and three negative cases in `plugin.json` are planned reviewer
 scenarios, not execution evidence. Some require a dedicated review workspace,
 reviewer-owned addresses, and deliberate authorization to spend credits. No
 reviewer credentials, walkthrough recording, or completed native test results
@@ -40,7 +47,7 @@ Portal upload and scan remain necessary to resolve importer acceptance.
   requested by the OpenAI portal.
 - A dedicated review account and sample workspace, entered only through the
   secure reviewer-access form; sign-in must meet the portal's requirements.
-- Execution and evidence for all eight positive and five negative cases with
+- Execution and evidence for all five positive and three negative cases with
   that account. Paid operations require explicit authorization and actual owned
   review mailboxes; reserved sandbox fixtures must not be used through OAuth.
 - An accessible walkthrough recording demonstrating the cases; add its genuine

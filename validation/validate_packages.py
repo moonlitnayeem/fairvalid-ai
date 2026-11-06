@@ -8,6 +8,7 @@ import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = '1.1.0'
+OPENAI_VERSION = '1.1.1'
 MCP_URL = 'https://mcp.fairvalid.com/mcp'
 paths = subprocess.check_output(
     ['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
@@ -20,9 +21,10 @@ toml_docs = {str(p.relative_to(ROOT)): tomllib.loads(p.read_text()) for p in fil
 for name in [
     '.claude-plugin/plugin.json', 'claude/.claude-plugin/plugin.json',
     '.cursor-plugin/plugin.json', 'gemini-extension.json', 'server.json',
-    'openai/plugin.json', 'openclaw/package.json', 'openclaw/.claude-plugin/plugin.json',
+    'openclaw/package.json', 'openclaw/.claude-plugin/plugin.json',
 ]:
     assert json_docs[name]['version'] == VERSION, name
+assert json_docs['openai/plugin.json']['version'] == OPENAI_VERSION
 assert json_docs['.claude-plugin/marketplace.json']['plugins'][0]['version'] == VERSION
 assert json_docs['.claude-plugin/marketplace.json']['plugins'][0]['source'] == './claude'
 assert toml_docs['zed/extension.toml']['version'] == VERSION
@@ -68,7 +70,7 @@ overlay = json_docs['openai/plugin.json']['extensions']['com.openai']
 for value in [overlay['onboardingSkill'], overlay['interface']['composerIcon'], overlay['interface']['logo']]:
     assert (ROOT / 'openai' / value).is_file()
 cases = overlay['review']['test_cases']
-assert len(cases['positive']) == 8 and len(cases['negative']) == 5
+assert len(cases['positive']) == 5 and len(cases['negative']) == 3
 
 link_count = 0
 for file in files:
@@ -83,6 +85,7 @@ for file in files:
 
 print(json.dumps({
     'distribution_version': VERSION,
+    'openai_package_version': OPENAI_VERSION,
     'json_files_parsed': len(json_docs), 'toml_files_parsed': len(toml_docs),
     'local_markdown_links': link_count, 'matching_fairmatch_skills': len(skill_paths),
     'default_tools': len(default_tools),

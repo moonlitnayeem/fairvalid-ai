@@ -122,3 +122,16 @@ OAuth or model-driven execution. No paid live acquisition was performed for this
 release acceptance. Each provider's native workflow must be exercised and
 recorded before claiming it passed.
 Public listings and review outcomes must be tracked separately from this package.
+
+## OpenAI 1.1.1 importer compatibility patch
+
+On November 6, 2026, the live OpenAI importer required exactly five positive and
+three negative review cases. Package 1.1.1 groups the planned scenarios into
+those counts while preserving coverage of all twelve tools and explicit spend,
+cancellation, workspace, permission and safe-retry boundaries. Pricing is removed
+from the OpenAI listing description. The ten-file archive, runtime endpoint and
+six requested OAuth scopes are unchanged. Other provider packages remain 1.1.0.
+
+These metadata checks do not execute the planned native-client review scenarios.
+The recorded 23-check production Test-key acceptance remains API/MCP evidence,
+not proof that the OpenAI review cases passed.
