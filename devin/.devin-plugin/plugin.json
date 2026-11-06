@@ -1,0 +1,30 @@
+{
+  "name": "fairvalid",
+  "displayName": "FairValid",
+  "description": "Find FairMatch business leads, unlock verified work emails, and review email verification jobs and credits",
+  "shortDescription": "Verified emails and FairMatch leads",
+  "setup": {
+    "notice": "A FairValid workspace is required for connected tools. Newly acquired verified work emails cost four credits each; acquisition requires a confirmed credit ceiling."
+  },
+  "homepage": "https://fairvalid.com/help/mcp",
+  "repository": "https://github.com/moonlitnayeem/fairvalid-ai",
+  "logo": "assets/fairvalid-icon-512.png",
+  "keywords": [
+    "Customer & Sales",
+    "FairMatch",
+    "Email Verification"
+  ],
+  "mcpServers": {
+    "fairvalid": {
+      "url": "https://mcp.fairvalid.com/mcp",
+      "transport": "http",
+      "oauthScopes": [
+        "read",
+        "balance",
+        "leads:read",
+        "leads:acquire",
+        "offline_access"
+      ]
+    }
+  }
+}
