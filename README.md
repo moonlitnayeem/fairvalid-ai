@@ -54,7 +54,7 @@ selects Live keys.
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
 | OpenClaw | Claude-format bundle with [marketplace installation and native sign-in](#openclaw-marketplace-installation) |
 | VS Code | Remote MCP server with [native marketplace installation](#vs-code-marketplace-installation) |
-| Devin | [Native plugin candidate](devin/README.md); official package validation passed, native acceptance and marketplace submission pending |
+| Devin | [Personal installation and setup skill verified](#devin-personal-installation); [official marketplace submission](https://github.com/CognitionAI/devin-marketplace/pull/180) awaiting review |
 | Zed | Local transport extension and connection instructions in [zed](zed/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
@@ -112,6 +112,27 @@ Native marketplace search and installation of version **1.1.0** were verified in
 VS Code **1.145.2** on November 6, 2026. That check did not require signing in to
 Copilot. OAuth and FairMatch tool execution in VS Code have not yet been qualified
 by this acceptance test.
+
+### Devin personal installation
+
+FairValid is submitted to the
+[official Devin marketplace](https://github.com/CognitionAI/devin-marketplace/pull/180)
+and awaits provider review and merge. Public marketplace search and installation
+have not yet been established.
+
+To install personally, open **Customize → Plugins**, choose **Myself**, then
+**Add plugin → From repository**. Enter
+`https://github.com/moonlitnayeem/fairvalid-ai` and subdirectory `devin`.
+The package includes the FairValid MCP connection and three skills:
+`fairmatch-setup`, `fairmatch-leads`, and `verification-results`.
+
+Personal installation and `/fairvalid:fairmatch-setup` execution were verified in
+Devin Desktop **3.11.238** on November 6, 2026, using SWE-2 Flash Medium in Ask
+mode. The installed package matched the reviewed source, and the native session
+loaded the complete packaged setup skill before producing its response.
+This help skill uses public information and makes no MCP calls. The connection
+remained unconnected; OAuth and FairMatch business-tool execution in Devin have
+not yet been qualified. [Package details](devin/README.md).
 
 ## What you can do
 
