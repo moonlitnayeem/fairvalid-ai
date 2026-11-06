@@ -54,6 +54,7 @@ selects Live keys.
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
 | OpenClaw | Claude-format bundle with [marketplace installation and native sign-in](#openclaw-marketplace-installation) |
 | VS Code | Remote MCP server with [native marketplace installation](#vs-code-marketplace-installation) |
+| Devin | [Native plugin candidate](devin/README.md); official package validation passed, native acceptance and marketplace submission pending |
 | Zed | Local transport extension and connection instructions in [zed](zed/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
