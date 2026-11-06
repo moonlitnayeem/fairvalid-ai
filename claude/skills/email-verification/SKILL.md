@@ -88,3 +88,11 @@ a job to poll. Test keys cannot read live balances.
 For help with setup or current API behavior, use
 [FairValid MCP documentation](https://fairvalid.com/help/mcp) and
 [the customer API reference](https://fairvalid.com/help/api).
+
+## FairMatch lead requests
+
+For lead discovery, quotes, verified work-email unlocks, or owned lead retrieval,
+use the separate [FairMatch workflow](../fairmatch-leads/SKILL.md). Its `leads:read` and
+`leads:acquire` permissions are opt-in; verification grants do not imply lead
+access. Never use an email-verification submission as a substitute for a FairMatch
+unlock, or unlock leads as an installation test.

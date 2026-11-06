@@ -1,6 +1,6 @@
 {
   "name": "fairvalid",
-  "description": "FairValid email verification tools and workflows for AI assistants.",
+  "description": "FairValid email verification and FairMatch lead workflows for AI assistants.",
   "owner": {
     "name": "FairValid",
     "email": "nayeem@fairvalid.com"
@@ -9,8 +9,8 @@
     {
       "name": "fairvalid",
       "source": "./claude",
-      "description": "Email verification and results for your FairValid workspace.",
-      "version": "1.0.0"
+      "description": "Email verification, FairMatch lead search and verified work-email unlocks for your workspace.",
+      "version": "1.1.0"
     }
   ]
 }

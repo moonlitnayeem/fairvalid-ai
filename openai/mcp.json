@@ -15,6 +15,8 @@
               "read",
               "submit",
               "balance",
+              "leads:read",
+              "leads:acquire",
               "offline_access"
             ]
           }

@@ -1,5 +1,11 @@
 # Client configuration examples
 
+> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> acceptance on November 6, 2026. Provider listings and native-client acceptance
+> are tracked separately. Discover the connected server capabilities before use;
+> acquisition requires an explicit numerical credit limit and confirmation.
+
+
 These files contain connection metadata, not credentials. Merge only the relevant
 server entry into the client's configuration and preserve existing entries.
 Review its trust and OAuth prompts. OAuth signs in on `https://fairvalid.com`
@@ -22,7 +28,7 @@ Claude Code plugin. Grok Build's marketplace is also separate from a grok.com
 custom connector. Provider availability and organization policies can differ.
 
 Use the client's browser authorization flow. For an authorized connection test,
-discover all six FairValid tools and call `fairvalid_get_balance` with balance
+discover the currently exposed FairValid tools and call `fairvalid_get_balance` with balance
 scope. This is a read and uses no verification credits. Do not run live
 verification or cancel customer jobs just to test installation.
 
@@ -63,7 +69,7 @@ hermes mcp add fairvalid --url https://mcp.fairvalid.com/mcp --auth oauth
 
 Complete sign-in and consent at `https://fairvalid.com`, choosing the intended
 workspace and existing Live API key. No client secret is needed. An equivalent
-starting configuration limits the visible tools to reads:
+starting configuration includes all six FairMatch tools and excludes verification writes:
 
 ```yaml
 mcp_servers:
@@ -75,6 +81,12 @@ mcp_servers:
         - fairvalid_get_balance
         - fairvalid_get_job
         - fairvalid_get_results
+        - fairvalid_get_lead_filters
+        - fairvalid_search_leads
+        - fairvalid_quote_leads
+        - fairvalid_unlock_leads
+        - fairvalid_get_lead_batch
+        - fairvalid_get_leads
 ```
 
 The tool filter limits exposure, not OAuth scopes. Review the grant at FairValid
@@ -110,3 +122,20 @@ connection or authenticated tool call was performed for that check.
 References: [Hermes MCP and catalog contribution](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp),
 [connection tests](https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes),
 and [skills and public GitHub taps](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills).
+
+## FairMatch permissions and acquisition
+
+The five non-unlock FairMatch tools use `leads:read`. Paid unlock uses the separate
+`leads:acquire` scope and requires quote → explicit numerical ceiling approval →
+`fairvalid_unlock_leads` with stable idempotency → batch polling. Existing grants
+do not gain these scopes on update; reconnect deliberately with the right key.
+The Hermes example includes all six FairMatch tools by default, so acquisition
+needs no additional tool-filter change. A visible tool is not a grant or approval
+to spend. Search has `readOnlyHint: false` but does not acquire contacts.
+See the [FairMatch guide](../docs/fairmatch.md) for exact contracts and synthetic
+fixtures; no native acceptance of these new tools is claimed.
+
+The separate Hermes skill can be reviewed with
+`hermes skills inspect moonlitnayeem/fairvalid-ai/skills/fairmatch-leads` and installed
+with `hermes skills install moonlitnayeem/fairvalid-ai/skills/fairmatch-leads`. Keep
+its normal scan and confirmation. Installing the skill grants no account access.

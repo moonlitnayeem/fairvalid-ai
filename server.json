@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.moonlitnayeem/fairvalid",
   "title": "FairValid",
-  "description": "Verify emails, track verification jobs, read results, and check FairValid workspace credits.",
-  "version": "1.0.0",
+  "description": "Verify emails and use FairMatch to search, quote and unlock verified work-email leads.",
+  "version": "1.1.0",
   "websiteUrl": "https://fairvalid.com/help/mcp",
   "repository": {
     "url": "https://github.com/moonlitnayeem/fairvalid-ai",
@@ -13,7 +13,9 @@
     {
       "src": "https://fairvalid.com/brand/fairvalid-icon.svg",
       "mimeType": "image/svg+xml",
-      "sizes": ["any"]
+      "sizes": [
+        "any"
+      ]
     }
   ],
   "remotes": [

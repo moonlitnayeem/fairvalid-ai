@@ -2,9 +2,15 @@
 
 # FairValid for Claude
 
+> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> acceptance on November 6, 2026. Provider listings and native-client acceptance
+> are tracked separately. Discover the connected server capabilities before use;
+> acquisition requires an explicit numerical credit limit and confirmation.
+
+
 Verify email addresses, follow verification jobs, and review results and credit
 balances in your FairValid workspace. This plugin connects Claude to FairValid's
-hosted MCP server and includes the email-verification skill.
+hosted MCP server and includes separate email-verification and FairMatch skills.
 
 **Server:** `https://mcp.fairvalid.com/mcp`
 
@@ -49,7 +55,7 @@ claude --plugin-dir /path/to/fairvalid-ai/claude
 Review Claude's trust prompts and complete OAuth before using the tools. Local
 validation does not establish directory approval or native OAuth acceptance.
 
-## Available tools
+## Email-verification tools
 
 - `fairvalid_verify_email`: submit one email address.
 - `fairvalid_submit_job`: submit 1 to 5,000 email addresses.
@@ -104,9 +110,32 @@ connecting. For support or data-handling questions, contact
 
 ## License and brand
 
-The plugin contains a manifest, remote MCP configuration, a skill, documentation,
+The plugin contains a manifest, remote MCP configuration, workflow skills, documentation,
 and the FairValid icon. It defines no local executable, dependency installation,
 or hooks, and bundles no credentials.
 
 The distribution uses the [MIT License](LICENSE). FairValid names and logos
 identify the publisher and remain trademarks. See the [brand guidance](BRAND.md).
+
+## FairMatch in version 1.1.0
+
+The package includes the [FairMatch workflow](skills/fairmatch-leads/SKILL.md).
+Use `fairvalid_get_lead_filters`, `fairvalid_search_leads` and
+`fairvalid_quote_leads` to discover and quote the user's chosen business leads.
+`fairvalid_unlock_leads` starts a batch only after explicit confirmation of the
+selected people and a numerical `maximumCredits` ceiling. Follow
+`fairvalid_get_lead_batch`, then retrieve owned contacts with
+`fairvalid_get_leads`. The six FairMatch tools passed controlled production sandbox acceptance;
+discover actual server capabilities and permissions in the connected client.
+
+FairMatch charges four credits per newly acquired verified work email; already-
+owned and unavailable contacts cost zero. Quotes reserve no credits. Preserve the
+same selected API-key identity, ordered IDs, ceiling and idempotency key after an
+uncertain unlock. Do not make new paid batches to conceal uncertainty.
+
+`leads:read` and `leads:acquire` are separate opt-in permissions. Updating a package
+does not expand existing keys or OAuth grants. Deliberately reconnect with an
+appropriately scoped key and review the requested permissions and cap. Installation
+does not authorize acquisition. Synthetic tests require a separate direct Test-key
+connection; OAuth is Live-only. See the [API/MCP guide](https://github.com/moonlitnayeem/fairvalid-ai/blob/main/docs/fairmatch.md) for
+exact inputs, fixture behavior, scope boundaries and release limits.

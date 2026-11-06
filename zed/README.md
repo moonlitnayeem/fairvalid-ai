@@ -1,10 +1,16 @@
 # FairValid for Zed
 
+> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> acceptance on November 6, 2026. Provider listings and native-client acceptance
+> are tracked separately. Discover the connected server capabilities before use;
+> acquisition requires an explicit numerical credit limit and confirmation.
+
+
 <img src="https://raw.githubusercontent.com/moonlitnayeem/fairvalid-ai/d25263d187307d9e35f4dc7d843cd0ca183eb8ad/assets/fairvalid-icon-512.png" alt="FairValid" width="96" />
 
-Connect Zed's Agent Panel to FairValid's hosted MCP server for email verification, job status, results and credit balance.
+Connect Zed's Agent Panel to FairValid's hosted MCP server for email verification and FairMatch lead discovery, quotes, confirmed unlocks and owned-contact retrieval.
 
-**Publication candidate:** local development installation, FairValid OAuth and discovery of all six tools have been verified in Zed 1.26.2. The chat-driven balance check was blocked by Zed trial permissions before tool execution, so native balance execution remains unverified. This extension has not been submitted to or published in the Zed registry.
+**Historical 0.1.0 evidence:** local development installation, FairValid OAuth and discovery of the six email-verification tools were verified in Zed 1.26.2. This is not native acceptance of the 1.1.0 FairMatch update. The chat-driven balance check was blocked by Zed trial permissions before tool execution, so native balance execution remains unverified. This extension has not been submitted to or published in the Zed registry.
 
 - Publisher and support: **FairValid · nayeem@fairvalid.com**
 - Hosted endpoint: `https://mcp.fairvalid.com/mcp`
@@ -16,7 +22,7 @@ Connect Zed's Agent Panel to FairValid's hosted MCP server for email verificatio
 
 ## Native development installation
 
-For development installation, use Zed's **Install Dev Extension** action and select this extension directory. Zed requires a Rust toolchain with `wasm32-wasip2`. This preparation pins Rust 1.99.1. The declared `undici` 7.12.0 dependency establishes a Node.js floor of 20.18.1; later versions resolved by the bridge may require a newer runtime. The bridge package itself does not declare an `engines` field. The extension obtains Node using Zed's API. The local Zed 1.26.2 check selected Node 24.22.1 with resolved `undici` 7.30.1; other environments still need a compatible runtime.
+For development installation, use Zed's **Install Dev Extension** action and select this extension directory. Zed requires a Rust toolchain with `wasm32-wasip2`. This package pins Rust 1.99.1. The declared `undici` 7.12.0 dependency establishes a Node.js floor of 20.18.1; later versions resolved by the bridge may require a newer runtime. The bridge package itself does not declare an `engines` field. The extension obtains Node using Zed's API. The local Zed 1.26.2 check selected Node 24.22.1 with resolved `undici` 7.30.1; other environments still need a compatible runtime.
 
 Enabling or connecting the context server can download the pinned bridge and open a browser for OAuth. No endpoint, credentials or arbitrary executable can be overridden in this extension's settings. No key is embedded in the package.
 
@@ -28,7 +34,7 @@ Start with “Show my FairValid credit balance.” That read uses no verificatio
 
 A chat-driven tool request also needs an available model provider in Zed. Our native balance attempt returned **Permission Denied — Trial access is blocked** before any FairValid tool call. If this occurs, resolve the Zed/model-provider access issue before retrying; an activated trial dashboard alone does not establish model access.
 
-## Available hosted tools
+## Existing verification tools
 
 | Tool | Purpose |
 | --- | --- |
@@ -39,7 +45,7 @@ A chat-driven tool request also needs an available model provider in Zed. Our na
 | `fairvalid_submit_job` | Submit an email-verification batch. |
 | `fairvalid_cancel_job` | Request cancellation of unfinished work. |
 
-All six tools were discovered in the local Zed development test; that does not mean all six were called. Grant permissions still control access. Live verification can reserve credits and complete asynchronously. Check final status/results before claiming completion or cost. A cancellation request does not prove that already-running verification was prevented. Inconclusive results do not establish that an address is deliverable. Use authorized addresses only.
+Those six verification tools were discovered in the earlier local Zed development test; that does not mean all six were called or that FairMatch was tested. Grant permissions still control access. Live verification can reserve credits and complete asynchronously. Check final status/results before claiming completion or cost. A cancellation request does not prove that already-running verification was prevented. Inconclusive results do not establish that an address is deliverable. Use authorized addresses only.
 
 ## Local OAuth storage
 
@@ -54,3 +60,23 @@ Build the source with `cargo build --locked --release --target wasm32-wasip2`. N
 Before a public submission, publish this exact extension source at an actual public repository/subdirectory, record its commit, and manually test that commit inside Zed. Verify installation, intended-account OAuth, tools discovery and one authorized balance read. Confirm the OAuth cache stays in the extension work directory and does not appear in the project or shared bridge cache. Native read results and account-permission enforcement remain separate checks; tool discovery alone does not establish them.
 
 Zed's registry requires a public HTTPS Git submodule and matching manifest version. Its current [AI policy](https://github.com/zed-industries/extensions/blob/7ceecb06cb55f983d3467e83830ab15e95cec86e/AI_POLICY.md) welcomes AI-assisted coding, requires a human contributor who understands the work, and expects the PR explanation and maintainer replies in that person's own words. Autonomous contributions are prohibited. No PR prose is included. Zed plans to replace MCP extensions with the official MCP Registry; FairValid already has an official MCP Registry identity, but that alone is not proof of discoverability in Zed.
+
+## FairMatch 1.1.0
+
+The same connection can expose six additional hosted tools from the deployed
+1.1.0 runtime: `fairvalid_get_lead_filters`, `fairvalid_search_leads`,
+`fairvalid_quote_leads`, `fairvalid_unlock_leads`, `fairvalid_get_lead_batch` and
+`fairvalid_get_leads`. Discover the actual schemas before use. Lead reads require
+opt-in `leads:read`; unlock requires `leads:acquire`. Existing keys/grants do not
+gain these permissions on update. Reconnect deliberately with an appropriately
+scoped key and review the consent page; do not edit stored OAuth tokens.
+
+Search and quote first, then obtain explicit approval of the selected people and
+a numerical maximum credit spend. Unlock uses 1–50 selection IDs,
+`maximumCredits` 0–200, `confirm: true` and one stable `idempotency_key`. Four credits
+apply per newly acquired verified work email; owned/unavailable contacts cost zero.
+Keep the same identity, IDs, ceiling and idempotency key after uncertain admission.
+Poll the returned batch with 5–30 second backoff and retrieve owned leads. Do not
+run live acquisition as an installation test. The [FairMatch guide](https://github.com/moonlitnayeem/fairvalid-ai/blob/main/docs/fairmatch.md)
+contains exact contracts and synthetic Test-key fixtures. No new native Zed
+OAuth/tool test or marketplace acceptance is claimed for this update.

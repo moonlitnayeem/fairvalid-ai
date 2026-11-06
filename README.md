@@ -2,10 +2,16 @@
 
 # FairValid for AI assistants
 
-Verify email addresses from your AI assistant, follow verification jobs, and read
-results in your FairValid workspace. This package connects to FairValid's hosted
-Model Context Protocol (MCP) server and includes a skill for handling verification,
-credits, retries, and result interpretation.
+> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> acceptance on November 6, 2026. Provider listings and native-client acceptance
+> are tracked separately. Discover the connected server capabilities before use;
+> acquisition requires an explicit numerical credit limit and confirmation.
+
+
+Verify email addresses and use **FairMatch by FairValid** to find business leads,
+quote selected contacts, and unlock verified work emails with a confirmed credit
+ceiling. This package connects to FairValid's hosted Model Context Protocol (MCP)
+server and includes separate verification and FairMatch workflow skills.
 
 **Server:** `https://mcp.fairvalid.com/mcp`  
 **Transport:** Streamable HTTP  
@@ -20,6 +26,15 @@ the requested permissions. Its workspace, scopes, and lifetime spending cap appl
 to the connection. A workspace Owner or Manager can manage keys on the
 [API keys page](https://fairvalid.com/integrations/api-keys). Revoking the selected
 key ends its connections.
+
+FairMatch adds opt-in `leads:read` and `leads:acquire` permissions. Existing keys
+and grants keep their existing permissions; a package update cannot expand them.
+To enable FairMatch, deliberately reconnect through native OAuth and select an
+appropriately scoped key. Review the new permissions and cap before consent.
+OpenAI 1.1.0 requests both lead scopes during fresh authorization. OpenClaw and
+Hermes include all six FairMatch tools alongside the three verification reads.
+Their filters do not grant OAuth permissions or authorize spending: unlock still
+requires `leads:acquire`, a quote and explicit approval of a numerical maximum.
 
 No client secret is bundled or required for automatic public client registration.
 Never paste a key, password, OAuth code, or token into chat. For a client that
@@ -70,14 +85,22 @@ Review client trust prompts and complete OAuth before using the tools.
 | `fairvalid_get_results` | Read up to 50 results per page | `read` |
 | `fairvalid_cancel_job` | Cancel remaining job work | `submit` |
 | `fairvalid_get_balance` | Read live workspace credits | `balance` |
+| `fairvalid_get_lead_filters` | Discover FairMatch filter keys, choices and limits | `leads:read` |
+| `fairvalid_search_leads` | Preview up to 50 matching people; no paid unlock | `leads:read` |
+| `fairvalid_quote_leads` | Quote 1–50 selected people without reserving credits | `leads:read` |
+| `fairvalid_unlock_leads` | Start a confirmed acquisition batch with a credit ceiling | `leads:acquire` |
+| `fairvalid_get_lead_batch` | Read the same key's acquisition batch and charges | `leads:read` |
+| `fairvalid_get_leads` | Read up to 100 owned verified contacts per page | `leads:read` |
 
 Examples of requests:
 
 - “Show my FairValid credit balance.”
 - “Show the current status and results for this FairValid job.”
 - “Verify these email addresses with FairValid.”
+- “Find FairMatch leads matching my criteria, then show a quote before unlocking.”
+- “Show my saved FairMatch leads without acquiring any new contacts.”
 
-The last request starts live work when connected through OAuth or a Live key.
+The verification request starts live work when connected through OAuth or a Live key.
 Only submit addresses you intend to verify and are authorized to process.
 
 ## Credits and result interpretation
@@ -99,11 +122,32 @@ input**. Reconnecting to a different API key can create another run even if the
 idempotency key is unchanged. Do not rotate keys or resubmit with a new key just
 to make an uncertain request appear successful.
 
+## FairMatch selection, credits and confirmation
+
+FairMatch follows **search → quote → explicit maximum-credit confirmation →
+unlock → poll batch → retrieve owned leads**. Four credits are charged for each
+newly acquired verified work email; already-owned and unavailable contacts cost
+zero. A quote reserves no credits and does not guarantee a deliverable contact.
+Unlock accepts 1–50 distinct selection IDs, `maximumCredits` from 0–200,
+`confirm: true`, and a stable `idempotency_key`. Only set confirmation after the
+user approves that exact selection and numerical ceiling. Do not split work to
+bypass the ceiling, workspace balance or key's shared lifetime cap.
+
+Live selections expire after 30 minutes. If admission is uncertain, reuse the
+original IDs, ceiling, idempotency key and API-key identity; do not refresh the
+selection or make another paid batch to hide uncertainty. Accepted batches can
+remain `working`; follow `batch_id` and report observed `charged_credits` after
+processing. Lead ownership does not authorize outreach.
+
+See the [FairMatch API/MCP guide](docs/fairmatch.md) for exact argument fields,
+permission upgrades, synthetic test cases and release limits, and the
+[FairMatch skill](skills/fairmatch-leads/SKILL.md) for the complete workflow.
+
 ## Connection and acceptance tests
 
 A connection or installation request does not authorize customer verification or
-job cancellation. For an authorized OAuth connection check, discover the six
-tools and call `fairvalid_get_balance`; that read spends no verification credits.
+job cancellation or lead acquisition. For an authorized OAuth connection check,
+discover the currently available tools and call `fairvalid_get_balance`; that read spends no verification credits.
 
 Default submission tests use a separate direct Test-key connection and the
 documented `example.com` fixtures. Sandbox work makes no live provider call and
@@ -126,7 +170,8 @@ none implies a provider's approval or publication. See the
 ## Privacy policy
 
 When you invoke a tool, the connected AI provider sends the supplied addresses,
-job identifiers, and other tool arguments to FairValid. FairValid processes them
+job and lead identifiers, search criteria, and other tool arguments to FairValid.
+FairMatch can return owned business-contact data to the connected assistant. FairValid processes them
 under its [Privacy Policy](https://fairvalid.com/privacy) and
 [Terms](https://fairvalid.com/terms). The AI provider also processes conversation
 and tool data under its own terms. Review those policies before connecting.

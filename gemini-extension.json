@@ -1,7 +1,7 @@
 {
   "name": "fairvalid",
-  "version": "1.0.0",
-  "description": "Verify email addresses, follow verification jobs, and review results and credit balances in your FairValid workspace.",
+  "version": "1.1.0",
+  "description": "Verify emails, find FairMatch leads, quote and unlock verified work emails, and inspect workspace jobs and credits.",
   "mcpServers": {
     "fairvalid": {
       "httpUrl": "https://mcp.fairvalid.com/mcp"

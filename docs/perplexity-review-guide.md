@@ -2,7 +2,7 @@
 
 ![FairValid](https://raw.githubusercontent.com/moonlitnayeem/fairvalid-ai/main/assets/fairvalid-icon-512.png)
 
-FairValid verifies email addresses and exposes six MCP tools for submissions,
+The original verification integration exposes six MCP tools for submissions,
 job status, results, cancellation and workspace verification-credit balance.
 Endpoint: **`https://mcp.fairvalid.com/mcp`** (Streamable HTTP).
 
@@ -137,3 +137,23 @@ time or support SLA is currently published; agree any review window directly.
 
 Guide prepared: 31 October 2026. Expected behavior is documented here; each
 reviewer's actual results must be recorded independently.
+
+## FairMatch 1.1.0 review guide — November 6, 2026
+
+The [FairMatch API/MCP guide](fairmatch.md) adds six proposed review tools and the
+exact synthetic fixtures from the owning implementation. These new tools and
+`leads:read` / `leads:acquire` are outside the earlier six-tool acceptance evidence.
+Controlled production Test-key acceptance passed on November 6: all six new
+tools were exercised through REST/MCP with synthetic contacts, zero charged
+credits, no live acquisition dispatch, unchanged cross-protocol replay and
+revocation denial. Native Perplexity testing remains unverified. Updating a
+package must not be described as upgrading an existing grant.
+
+Start with synthetic filter/search/quote, zero-credit confirmed unlock, unchanged
+idempotent replay, batch read and saved-contact retrieval in a separate direct
+Test-key connection. Any Live acquisition needs a separately authorized isolated
+workspace/key and explicit numerical maximum-credit confirmation. Do not reuse
+an existing verification review key for acquisition or broaden its scopes
+implicitly. Four credits apply only to each newly acquired verified work email;
+already-owned and unavailable contacts cost zero. See the linked guide for exact
+selection expiry, input limits, mock results and permission-failure cases.

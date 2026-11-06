@@ -8,7 +8,13 @@
         "include": [
           "fairvalid_get_balance",
           "fairvalid_get_job",
-          "fairvalid_get_results"
+          "fairvalid_get_results",
+          "fairvalid_get_lead_filters",
+          "fairvalid_search_leads",
+          "fairvalid_quote_leads",
+          "fairvalid_unlock_leads",
+          "fairvalid_get_lead_batch",
+          "fairvalid_get_leads"
         ]
       }
     }

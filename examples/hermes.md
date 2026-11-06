@@ -14,7 +14,7 @@ an existing Live API key and workspace, and review permissions. No OAuth client
 secret or API key is needed in chat. FairValid supports automatic public client
 registration and S256 PKCE. The selected key's workspace, scopes and cap apply.
 
-An equivalent read-only starting configuration is in [hermes.yaml](hermes.yaml).
+An equivalent configuration with the complete FairMatch workflow is in [hermes.yaml](hermes.yaml).
 Merge its `fairvalid` entry into the active Hermes profile's `mcp_servers` map;
 preserve existing connections. If FairValid already exists, review it before
 replacing it. Hermes uses `url` and `auth: oauth`, without a transport `type` in
@@ -62,3 +62,19 @@ Sources:
 - [Official connection-test semantics](https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes)
 - [Official Skills System and GitHub tap support](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills)
 - [FairValid MCP documentation](https://fairvalid.com/help/mcp)
+
+## FairMatch update
+
+The YAML exposes all six FairMatch tools, including `fairvalid_unlock_leads`,
+alongside the three verification reads: nine tools in total. The five non-unlock
+lead tools require `leads:read`; unlock requires `leads:acquire`. Search can
+perform a remote search and is not marked as a pure read. Review both permissions
+at consent. Existing grants do not expand on package updates. Use
+`hermes mcp configure fairvalid` to review or narrow the tool selection and
+`hermes mcp login fairvalid` when deliberate reauthorization is needed.
+A quote, explicit numerical maximum-credit confirmation and stable idempotency
+are required before each unlock; installation does not authorize acquisition.
+See the [FairMatch guide](../docs/fairmatch.md) and
+[shared skill](../skills/fairmatch-leads/SKILL.md). The server passed controlled
+production sandbox acceptance; new native Hermes FairMatch execution remains
+unverified.

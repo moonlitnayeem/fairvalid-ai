@@ -29,3 +29,12 @@ call. Record native client results only after performing them.
 Read `skills/email-verification/SKILL.md` for credits, result interpretation,
 idempotency, and cancellation behavior. Current setup help is available at
 https://fairvalid.com/help/mcp. Support: nayeem@fairvalid.com.
+
+For FairMatch lead requests, read `skills/fairmatch-leads/SKILL.md`. Version 1.1.0
+adds six tools with controlled production sandbox acceptance. Existing connections keep their
+permissions; lead use needs deliberate native reauthorization for `leads:read`
+and, when acquisition is wanted, `leads:acquire`. OpenClaw and Hermes expose all
+six FairMatch tools by default, alongside the three verification reads. Tool
+availability and connection tests never authorize unlocking contacts. Get a quote and confirm the exact
+numerical credit ceiling before unlock; four credits apply to each newly acquired
+verified work email. Use synthetic FairMatch fixtures only in Test-key mode.

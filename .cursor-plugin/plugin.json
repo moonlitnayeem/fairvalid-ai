@@ -1,11 +1,23 @@
 {
   "name": "fairvalid",
-  "version": "1.0.0",
-  "description": "Verify email addresses, follow verification jobs, and review results and credit balances in your FairValid workspace.",
-  "author": { "name": "FairValid", "email": "nayeem@fairvalid.com" },
+  "version": "1.1.0",
+  "description": "Verify emails, find FairMatch leads, quote and unlock verified work emails, and inspect workspace jobs and credits.",
+  "author": {
+    "name": "FairValid",
+    "email": "nayeem@fairvalid.com"
+  },
   "homepage": "https://fairvalid.com/help/mcp",
   "repository": "https://github.com/moonlitnayeem/fairvalid-ai",
   "license": "MIT",
-  "keywords": ["email", "email-verification", "deliverability", "fairvalid", "mcp"],
+  "keywords": [
+    "email",
+    "email-verification",
+    "deliverability",
+    "fairvalid",
+    "mcp",
+    "fairmatch",
+    "lead-search",
+    "verified-work-email"
+  ],
   "logo": "assets/fairvalid-icon.svg"
 }

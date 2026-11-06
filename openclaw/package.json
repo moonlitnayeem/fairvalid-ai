@@ -1,7 +1,7 @@
 {
   "name": "fairvalid",
-  "version": "1.0.0",
-  "description": "Email verification, job results, and credit balances through FairValid's remote MCP server.",
+  "version": "1.1.0",
+  "description": "Verify emails, find FairMatch leads, quote and unlock verified work emails, and inspect workspace jobs and credits.",
   "license": "MIT",
   "homepage": "https://fairvalid.com/help/mcp",
   "repository": {
