@@ -75,6 +75,21 @@ For Gemini CLI, the public repository can be installed with
 These commands require that the referenced checkout or published repository exists.
 Review client trust prompts and complete OAuth before using the tools.
 
+### OpenClaw marketplace installation
+
+FairValid **1.1.0** is published on
+[ClawHub](https://clawhub.ai/fairvalid/plugins/fairvalid). Install and enable the
+FairValid plugin, then open **Plugins → FairValid → Accounts** in your OpenClaw
+Gateway. Choose **Connect** beside `fairvalid` and complete the FairValid browser
+consent. Select your workspace and a Live API key covering the requested
+permissions and an appropriate lifetime spending cap.
+
+Start a new agent session and ask “Show my FairValid credit balance.” For
+FairMatch, ask to search and quote leads before approving an exact selection and
+numerical credit ceiling. The published bundle exposes all six FairMatch tools
+and three verification read tools. Existing connections need deliberate consent
+for the lead permissions.
+
 ## What you can do
 
 | Tool | Purpose | Permission |
