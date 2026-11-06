@@ -53,6 +53,7 @@ selects Live keys.
 | Gemini CLI | Root `gemini-extension.json` and shared skill |
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
 | OpenClaw | Claude-format bundle with [marketplace installation and native sign-in](#openclaw-marketplace-installation) |
+| VS Code | Remote MCP server with [native marketplace installation](#vs-code-marketplace-installation) |
 | Zed | Local transport extension and connection instructions in [zed](zed/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
@@ -94,6 +95,22 @@ On November 6, 2026, all six FairMatch tools passed a live end-to-end test throu
 the installed ClawHub 1.1.0 bundle on OpenClaw 2026.11.1, using its native Claude
 CLI runtime with Claude Code 2.1.312. The test retrieved an existing owned contact
 through a confirmed zero-credit batch, with no additional acquisition charge.
+
+### VS Code marketplace installation
+
+Open **Chat → Open Customizations → Browse**, search for **FairValid**, and
+choose **Install** on the MCP Gallery listing published by `moonlitnayeem`.
+The listing includes email verification and FairMatch and links to the
+[public GitHub MCP Registry entry](https://github.com/mcp/moonlitnayeem/fairvalid).
+
+After installation, open **MCP Servers** to find FairValid. Start the server and
+complete the client's FairValid connection and consent flow before using tools.
+Choose a key with the lead permissions if you want to use FairMatch.
+
+Native marketplace search and installation of version **1.1.0** were verified in
+VS Code **1.145.2** on November 6, 2026. That check did not require signing in to
+Copilot. OAuth and FairMatch tool execution in VS Code have not yet been qualified
+by this acceptance test.
 
 ## What you can do
 
