@@ -52,7 +52,7 @@ selects Live keys.
 | Cursor | `.cursor-plugin/plugin.json`, `mcp.json`, and shared skill |
 | Gemini CLI | Root `gemini-extension.json` and shared skill |
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
-| OpenClaw | Separate Claude-format bundle in [openclaw](openclaw/README.md) |
+| OpenClaw | Claude-format bundle with [marketplace installation and native sign-in](#openclaw-marketplace-installation) |
 | Zed | Local transport extension and connection instructions in [zed](zed/README.md) |
 | Other MCP clients | Provider-specific configurations in [examples](examples/README.md) |
 
@@ -89,6 +89,11 @@ FairMatch, ask to search and quote leads before approving an exact selection and
 numerical credit ceiling. The published bundle exposes all six FairMatch tools
 and three verification read tools. Existing connections need deliberate consent
 for the lead permissions.
+
+On November 6, 2026, all six FairMatch tools passed a live end-to-end test through
+the installed ClawHub 1.1.0 bundle on OpenClaw 2026.11.1, using its native Claude
+CLI runtime with Claude Code 2.1.312. The test retrieved an existing owned contact
+through a confirmed zero-credit batch, with no additional acquisition charge.
 
 ## What you can do
 
