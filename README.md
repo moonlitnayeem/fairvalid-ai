@@ -50,6 +50,7 @@ selects Live keys.
 | ChatGPT / Codex | Separate portable plugin package in [openai](openai/README.md) |
 | Grok Build | Claude-compatible plugin and MCP files, plus the shared skill |
 | Cursor | `.cursor-plugin/plugin.json`, `mcp.json`, and shared skill |
+| Composio | [Add the FairValid Custom MCP toolkit to your project](composio/README.md) |
 | Gemini CLI | Root `gemini-extension.json` and shared skill |
 | Hermes Agent (Nous Research) | Native HTTP OAuth setup and shared skill in [examples](examples/README.md) |
 | OpenClaw | Claude-format bundle with [marketplace installation and native sign-in](#openclaw-marketplace-installation) |
