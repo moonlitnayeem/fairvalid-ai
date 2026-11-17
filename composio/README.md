@@ -4,6 +4,15 @@
 
 Verify email addresses and find verified work emails with FairMatch from a Composio agent. A project administrator registers FairValid's hosted MCP server once. Each user connects their own FairValid workspace through OAuth. The toolkit is shared within that Composio project. Composio manages admission to its global catalog separately.
 
+## Tested in Composio
+
+On November 16, 2026, Composio synced all 12 FairValid tools in an isolated review project. Its native tool executor completed 11 successful calls across two workflows.
+
+- **FairMatch.** We searched for one lead the workspace already owned, quoted the selection at zero credits and unlocked it with a zero-credit ceiling. The completed batch delivered the same contact ID and work email as the original saved lead. The final saved-lead lookup confirmed the match. FairValid charged zero credits.
+- **Email verification.** We verified one FairValid-owned address and retrieved its final `catch_all` result. FairValid released the reserved credit, and the final balance showed zero credits held.
+
+Project administrators can install this toolkit below. Publication in Composio’s global catalog is subject to Composio’s review.
+
 ## Add FairValid to your project
 
 Use Node.js 20 or later. From this repository's root, preview the name, endpoint, authentication method, project visibility and logo.
