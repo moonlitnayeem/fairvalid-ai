@@ -11,14 +11,14 @@ build step, or runtime dependency is required for the FairValid server.
 3. Retain tool approval prompts. Do not add global trust, auto-approval, hooks,
    shell helpers, or permission bypasses to make installation succeed.
 4. Complete OAuth in the client's browser flow. Sign-in and consent belong on
-   `https://fairvalid.com`. The user selects an existing Live API key and workspace.
+   `https://fairvalid.com`. Review the workspace and requested permissions, then choose **Allow connection**.
+   FairValid sets up access to the existing workspace balance automatically.
    Do not request credentials, consent codes, or tokens in chat or tool arguments.
 5. With permission to check the connection, discover the tools and use
    `fairvalid_get_balance` with balance scope. This spends no verification credits.
    Do not submit customer addresses or cancel existing jobs as a connection test.
 6. If sandbox testing is requested, use a separate direct Test-key connection
-   configured in the client's protected credential mechanism. OAuth selects Live
-   keys, so do not treat an OAuth connection as a sandbox. Use only documented
+   configured in the client's protected credential mechanism. OAuth uses live workspace data, so do not treat an OAuth connection as a sandbox. Use only documented
    reserved `example.com` fixtures, with a stable idempotency key.
 
 If authentication or client support is unavailable, report the exact failed
@@ -34,7 +34,7 @@ For FairMatch lead requests, read `skills/fairmatch-leads/SKILL.md`. Version 1.1
 adds six tools with controlled production sandbox acceptance. Existing connections keep their
 permissions; lead use needs deliberate native reauthorization for `leads:read`
 and, when acquisition is wanted, `leads:acquire`. OpenClaw and Hermes expose all
-six FairMatch tools by default, alongside the three verification reads. Tool
+six FairMatch tools, single-email verification and the three verification reads by default. Tool
 availability and connection tests never authorize unlocking contacts. Get a quote and confirm the exact
 numerical credit ceiling before unlock; four credits apply to each newly acquired
 verified work email. Use synthetic FairMatch fixtures only in Test-key mode.

@@ -10,7 +10,7 @@
       "name": "fairvalid",
       "source": "./claude",
       "description": "Email verification, FairMatch lead search and verified work-email unlocks for your workspace.",
-      "version": "1.1.0"
+      "version": "1.1.1"
     }
   ]
 }

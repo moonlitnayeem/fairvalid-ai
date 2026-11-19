@@ -1,6 +1,6 @@
 # Client configuration examples
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **FairValid 1.1.1 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -8,14 +8,15 @@
 
 These files contain connection metadata, not credentials. Merge only the relevant
 server entry into the client's configuration and preserve existing entries.
-Review its trust and OAuth prompts. OAuth signs in on `https://fairvalid.com`
-and selects an existing Live API key; no client secret is bundled.
+Review its trust and OAuth prompts. Sign in on `https://fairvalid.com` and approve the workspace connection. FairValid
+sets up access automatically. No client secret is bundled.
 
 | Client | Example | Setup surface |
 | --- | --- | --- |
 | Claude Code | [claude-code.json](claude-code.json) | Project `.mcp.json` or the client MCP setup command |
 | Cursor | [cursor.json](cursor.json) | Cursor MCP configuration; the plugin already supplies this |
 | Gemini CLI | [gemini.json](gemini.json) | `mcpServers` in Gemini settings; the extension already supplies this |
+| Kilo Code | [kilo.json](kilo.json) | Remote MCP entry in Kilo settings. Open the server to start browser sign-in. |
 | Cline | [cline.json](cline.json) | MCP Servers → Configure MCP Servers, or Remote Servers → Streamable HTTP |
 | Grok Build | [grok.toml](grok.toml) | The `mcp_servers` section of Grok configuration |
 | VS Code | [vscode.json](vscode.json) | Workspace `.vscode/mcp.json`, or MCP: Add Server → HTTP |
@@ -34,7 +35,7 @@ verification or cancel customer jobs just to test installation.
 
 For sandbox submissions, create a separate direct Test-key connection through
 the client's protected credential settings and use documented `example.com`
-fixtures. These OAuth examples are Live-key connections. Do not put real keys
+fixtures. These OAuth examples connect to live workspace data. Do not put real keys
 into these files or paste them in chat.
 
 Configuration schemas were checked against the official documentation below on
@@ -48,6 +49,7 @@ or successfully exercised.
 - [Gemini MCP and OAuth](https://geminicli.com/docs/tools/mcp-server/)
 - [Gemini extension reference](https://geminicli.com/docs/extensions/reference/)
 - [Cline MCP](https://docs.cline.bot/mcp/mcp-overview)
+- [Kilo Code remote MCP and OAuth](https://github.com/Kilo-Org/kilocode/blob/main/packages/kilo-docs/pages/automate/mcp/using-in-kilo-code.md)
 - [Grok Build MCP](https://docs.x.ai/build/features/mcp-servers)
 - [Grok plugin compatibility](https://docs.x.ai/build/features/skills-plugins-marketplaces)
 - [VS Code and portable Copilot MCP configuration](https://code.visualstudio.com/docs/agents/reference/mcp-configuration)
@@ -67,9 +69,8 @@ installation you want to perform, use its interactive setup:
 hermes mcp add fairvalid --url https://mcp.fairvalid.com/mcp --auth oauth
 ```
 
-Complete sign-in and consent at `https://fairvalid.com`, choosing the intended
-workspace and existing Live API key. No client secret is needed. An equivalent
-starting configuration includes all six FairMatch tools and excludes verification writes:
+Complete sign-in and consent at `https://fairvalid.com`, approving the requested access for the intended workspace. No client secret is needed. An equivalent
+starting configuration includes single-email verification and all six FairMatch tools:
 
 ```yaml
 mcp_servers:
@@ -81,6 +82,7 @@ mcp_servers:
         - fairvalid_get_balance
         - fairvalid_get_job
         - fairvalid_get_results
+        - fairvalid_verify_email
         - fairvalid_get_lead_filters
         - fairvalid_search_leads
         - fairvalid_quote_leads
@@ -92,7 +94,7 @@ mcp_servers:
 The tool filter limits exposure, not OAuth scopes. Review the grant at FairValid
 consent. Merge this into the active Hermes profile's `mcp_servers` map and preserve other
 connections. Review an existing FairValid entry before changing it. Use
-`hermes mcp configure fairvalid` to enable submission or cancellation only when
+`hermes mcp configure fairvalid` to enable bulk submission or cancellation only when
 wanted. `hermes mcp login fairvalid` reauthorizes an existing OAuth connection;
 restart the session or use `/reload-mcp` after setup.
 
@@ -100,7 +102,7 @@ restart the session or use `/reload-mcp` after setup.
 functional check, ask for the FairValid balance only; this spends no verification
 credits. Discovery alone does not prove a successful authenticated tool call.
 Do not submit customer addresses or cancel customer jobs to test installation.
-OAuth uses Live keys; sandbox work requires a separate direct Test-key connection.
+OAuth uses live workspace data; sandbox work requires a separate direct Test-key connection.
 
 The shared skill is independently available through GitHub:
 
@@ -128,7 +130,7 @@ and [skills and public GitHub taps](https://hermes-agent.nousresearch.com/docs/u
 The five non-unlock FairMatch tools use `leads:read`. Paid unlock uses the separate
 `leads:acquire` scope and requires quote → explicit numerical ceiling approval →
 `fairvalid_unlock_leads` with stable idempotency → batch polling. Existing grants
-do not gain these scopes on update; reconnect deliberately with the right key.
+do not gain these scopes on update; reconnect and approve the new permissions for the intended workspace.
 The Hermes example includes all six FairMatch tools by default, so acquisition
 needs no additional tool-filter change. A visible tool is not a grant or approval
 to spend. Search has `readOnlyHint: false` but does not acquire contacts.

@@ -2,7 +2,7 @@
 
 # FairValid for OpenClaw
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **FairValid 1.1.1 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -23,9 +23,9 @@ The [FairValid listing](https://clawhub.ai/fairvalid/plugins/fairvalid) has a pr
 1.0.0 release. Check the listing's actual version and publication status when
 installing; repository availability and registry publication are separate.
 
-Complete the FairValid sign-in and consent flow through OpenClaw. Select an
-existing Live API key for the intended workspace. Its scopes and lifetime cap
-apply. No client secret is required for automatic registration. Never paste
+Choose **Connect** in OpenClaw, sign in to FairValid and approve access for the
+intended workspace. FairValid sets up the connection and applies available
+workspace credits automatically. No client secret is required for automatic registration. Never paste
 credentials or authorization codes into chat.
 
 OpenClaw defaults native OAuth credentials to shared, operator-managed access.
@@ -34,29 +34,29 @@ sender's own account should use OpenClaw's documented per-requester OAuth setup;
 that requires a configured public Gateway origin. This bundle does not change
 gateway access or invent that deployment setting.
 
-The default tool filter exposes the three verification reads plus
+The default tool filter exposes single-email verification, three verification reads and
 `fairvalid_get_lead_filters`, `fairvalid_search_leads`, `fairvalid_quote_leads`,
 `fairvalid_unlock_leads`, `fairvalid_get_lead_batch` and `fairvalid_get_leads`:
-nine tools in total. This makes the complete FairMatch workflow available after
+ten tools in total. This makes the complete FairMatch workflow available after
 authorization; it grants neither OAuth scopes nor permission to spend credits.
 Approve `leads:read` and `leads:acquire` in FairValid consent, quote the chosen
 leads, and confirm the exact numerical credit ceiling before each unlock.
 Preserve normal tool approval prompts. If an administrator narrows the filter,
-respect that restriction. Verification submission/cancellation tools remain
+respect that restriction. Bulk submission and cancellation remain
 opt-in host configuration.
 
 For an authorized connection check, discover tools and read the balance with
 balance scope. Reading the balance spends no verification credits. Authentication
 saved, tool discovery, and a successful tool call are distinct outcomes. Do not
 verify customer addresses or cancel customer jobs as an installation test.
-OAuth uses Live keys; sandbox submissions require a separate direct Test-key
+OAuth uses live workspace data; sandbox submissions require a separate direct Test-key
 connection and documented `example.com` fixtures.
 
 Live submissions create asynchronous jobs and can reserve credits. Completed
 Valid and Invalid checks use one credit each. Genuine Unknown, unresolved
 catch-all, technical failures, and unprocessed items have no net verification
 charge. Cancellation does not reverse completed-check charges. Retry an uncertain
-submission with the same selected API-key identity, idempotency key, and unchanged
+submission with the same connection identity, idempotency key, and unchanged
 input; do not create duplicate work to obtain a success response.
 
 The shared workflow is in
@@ -92,12 +92,12 @@ discover actual server capabilities and permissions in the connected client.
 
 FairMatch charges four credits per newly acquired verified work email; already-
 owned and unavailable contacts cost zero. Quotes reserve no credits. Preserve the
-same selected API-key identity, ordered IDs, ceiling and idempotency key after an
+same connection identity, ordered IDs, ceiling and idempotency key after an
 uncertain unlock. Do not make new paid batches to conceal uncertainty.
 
 `leads:read` and `leads:acquire` are separate opt-in permissions. Updating a package
-does not expand existing keys or OAuth grants. Deliberately reconnect with an
-appropriately scoped key and review the requested permissions and cap. Installation
+does not expand existing keys or OAuth grants. To add permissions, reconnect and
+approve the new request for the same workspace. Installation
 does not authorize acquisition. Synthetic tests require a separate direct Test-key
 connection; OAuth is Live-only. See the [API/MCP guide](https://github.com/moonlitnayeem/fairvalid-ai/blob/main/docs/fairmatch.md) for
 exact inputs, fixture behavior, scope boundaries and release limits.

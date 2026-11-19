@@ -15,17 +15,16 @@ been verified.** It is not a completed Perplexity acceptance report.
 - Contact **[nayeem@fairvalid.com](mailto:nayeem@fairvalid.com)** to coordinate an
   isolated review workspace and an agreed review scope. No credentials are
   published here or supplied through chat, this repository or an application form.
-- OAuth opens FairValid's own sign-in and consent pages. A verified workspace
-  **owner or manager** selects an existing **Live API key** covering the requested
-  permissions. The key determines the workspace and spending cap. Reviewers must
+- OAuth opens FairValid's own sign-in and consent pages. A verified workspace **owner or manager** approves the requested permissions
+  for the intended workspace. FairValid automatically prepares the connection.
+  Review workspaces retain their configured spending cap. Reviewers must
   use their own authorized account; do not share an owner's login.
 - Start an authorized Live/OAuth connection check with `fairvalid_get_balance`
   and `balance` permission. This does not submit email checks or spend
   verification credits. A connection check does not authorize live submissions.
 - Synthetic tests require a **separate direct Test-key connection** in a client
   supporting protected bearer-header configuration. Enter the Test key only in
-  that client's protected credential settings. **OAuth currently selects Live
-  keys; never run the fixtures below through OAuth or a Live-key connection.**
+  that client's protected credential settings. **OAuth uses live workspace data; never run the fixtures below through OAuth or a Live-key connection.**
 - If Perplexity does not support that direct Test-key setup, use an agreed
   compatible MCP test client for the sandbox cases. A native Perplexity live test
   requires separate owner authorization, an isolated workspace, a bounded key
@@ -90,7 +89,7 @@ only explicitly authorized review accounts and data.
 | Case | Expected behavior |
 | --- | --- |
 | Missing or revoked credential | Authentication fails; no verification work is admitted. Stop and reconnect through the legitimate consent/credential flow. |
-| Live grant lacks the requested tool scope | Access is denied. Do not silently broaden permissions or switch keys/workspaces. Consent itself cannot select a key missing requested permissions. |
+| Live grant lacks the requested tool scope | Access is denied. Do not silently broaden permissions or switch keys/workspaces. A package update cannot add permissions to an existing grant. |
 | Unauthorized workspace/job | Return no other workspace's data. Use only an independently authorized second review workspace for this test; never probe customer job IDs. |
 | Replay an unchanged batch with the same key | Same job, no duplicate submission. Changing the body under that key produces `idempotency_conflict` (API 409). |
 | Test key with an undocumented address | Reject with `reserved_address_required` (API 422); no real verification. |
@@ -100,8 +99,8 @@ only explicitly authorized review accounts and data.
 
 After a timeout or uncertain admission, retry only with the same underlying key
 identity, idempotency key and unchanged input. OAuth refresh preserves the
-selected key identity. Honor retry hints; poll live jobs with backoff from two
-to ten seconds. Revoking the selected key ends its connections. Cancellation
+original connection identity. Honor retry hints; poll live jobs with backoff from two
+to ten seconds. Revoking the backing credential ends its connections. Cancellation
 does not reverse completed live charges, and in-flight checks may finish.
 
 ## Coverage, limitations and support

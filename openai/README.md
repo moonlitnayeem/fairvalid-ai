@@ -1,10 +1,12 @@
 # FairValid for ChatGPT and Codex
 
-> **OpenAI package 1.1.1 / FairValid runtime 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **OpenAI package 1.1.2 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
 
+
+[Install FairValid in ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae4b05013b08191a2f3931f995c1e21). After installation, choose **Connect**, sign in to FairValid and approve your workspace access. Available free credits are ready to use from the plugin.
 
 This package connects FairValid's hosted MCP service using OAuth Dynamic Client
 Registration. It includes the existing FairValid orange icon and a workflow for
@@ -15,17 +17,16 @@ Documentation: https://fairvalid.com/help/mcp
 Intended distribution source: https://github.com/moonlitnayeem/fairvalid-ai
 
 The package contains no credentials and performs no installation scripts or
-lifecycle hooks. The selected FairValid live API key determines workspace,
-permissions, and spending cap. OAuth does not provide sandbox mode.
+lifecycle hooks. FairValid assigns the approved permissions to the connection in its workspace
+and applies workspace credits and spending controls. OAuth does not provide sandbox mode.
 
 ## Package status
 
-OpenAI package 1.1.1 is a review-metadata compatibility patch: the live importer
-requires exactly five positive and three negative scenarios. The scenarios group
+Version 1.1.2 updates the instructions for signing in to FairValid. Version 1.1.1
+introduced exactly five positive and three negative review scenarios. The scenarios group
 all twelve tools while retaining separate spend and cancellation confirmations.
 The listing description omits pricing; functional credit controls remain in the
-skills and review cases. Runtime, OAuth scopes and other provider packages remain
-at the accepted 1.1.0 release.
+skills and review cases. The set of requested OAuth scopes and the twelve tools stay the same.
 
 The five positive and three negative cases in `plugin.json` are planned reviewer
 scenarios, not execution evidence. Some require a dedicated review workspace,
@@ -85,12 +86,12 @@ discover actual server capabilities and permissions in the connected client.
 
 FairMatch charges four credits per newly acquired verified work email; already-
 owned and unavailable contacts cost zero. Quotes reserve no credits. Preserve the
-same selected API-key identity, ordered IDs, ceiling and idempotency key after an
+same connection identity, ordered IDs, ceiling and idempotency key after an
 uncertain unlock. Do not make new paid batches to conceal uncertainty.
 
 `leads:read` and `leads:acquire` are separate opt-in permissions. Updating a package
-does not expand existing keys or OAuth grants. Deliberately reconnect with an
-appropriately scoped key and review the requested permissions and cap. Installation
+does not expand existing keys or OAuth grants. To add permissions, reconnect and
+approve the new request for the same workspace. Installation
 does not authorize acquisition. Synthetic tests require a separate direct Test-key
 connection; OAuth is Live-only. See the [API/MCP guide](https://github.com/moonlitnayeem/fairvalid-ai/blob/main/docs/fairmatch.md) for
 exact inputs, fixture behavior, scope boundaries and release limits.

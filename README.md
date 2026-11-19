@@ -2,7 +2,7 @@
 
 # FairValid for AI assistants
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **FairValid 1.1.1 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -20,34 +20,36 @@ server and includes separate verification and FairMatch workflow skills.
 
 ## Connect your workspace
 
-Use OAuth in a supported client. Sign in and approve access on
-[FairValid](https://fairvalid.com), then select an existing Live API key covering
-the requested permissions. Its workspace, scopes, and lifetime spending cap apply
-to the connection. A workspace Owner or Manager can manage keys on the
-[API keys page](https://fairvalid.com/integrations/api-keys). Revoking the selected
-key ends its connections.
+In your AI client, choose **Connect**, sign in to FairValid, review the requested
+access and choose **Allow connection**. FairValid prepares the connection for
+your workspace automatically. There is no FairValid API key to create or paste
+and no scope setup. If you manage several workspaces, select the one to use.
+Email checks and FairMatch unlocks use available free credits first. Connecting
+another plugin uses the same workspace balance. You can revoke a connection in
+[FairValid’s agent connections](https://fairvalid.com/integrations/mcp).
 
 FairMatch adds opt-in `leads:read` and `leads:acquire` permissions. Existing keys
 and grants keep their existing permissions; a package update cannot expand them.
-To enable FairMatch, deliberately reconnect through native OAuth and select an
-appropriately scoped key. Review the new permissions and cap before consent.
-OpenAI 1.1.0 requests both lead scopes during fresh authorization. OpenClaw and
-Hermes include all six FairMatch tools alongside the three verification reads.
+To enable FairMatch on an older verification-only connection, reconnect through
+the client and approve the additional access for your workspace.
+The OpenAI plugin requests both lead scopes during fresh authorization. OpenClaw and
+Hermes include all six FairMatch tools, single-email verification and the
+three verification reads.
 Their filters do not grant OAuth permissions or authorize spending: unlock still
 requires `leads:acquire`, a quote and explicit approval of a numerical maximum.
 
 No client secret is bundled or required for automatic public client registration.
 Never paste a key, password, OAuth code, or token into chat. For a client that
 uses bearer headers, configure an existing key through its protected credential
-settings. A direct Test key can be used for sandbox fixtures; OAuth currently
-selects Live keys.
+settings. A direct Test key can be used for sandbox fixtures; OAuth uses live workspace data.
 
 ## Supported package formats
 
 | Client | Included configuration |
 | --- | --- |
 | Claude / Claude Code | Dedicated plugin package in [claude](claude/README.md) |
-| ChatGPT / Codex | Separate portable plugin package in [openai](openai/README.md) |
+| ChatGPT | [Install FairValid in ChatGPT](https://chatgpt.com/plugins/plugin_asdk_app_6ae4b05013b08191a2f3931f995c1e21) |
+| Codex | Portable plugin package in [openai](openai/README.md) |
 | Grok Build | Claude-compatible plugin and MCP files, plus the shared skill |
 | Cursor | `.cursor-plugin/plugin.json`, `mcp.json`, and shared skill |
 | Composio | [Add the FairValid Custom MCP toolkit to your project](composio/README.md) |
@@ -84,8 +86,7 @@ FairValid **1.1.0** is published on
 [ClawHub](https://clawhub.ai/fairvalid/plugins/fairvalid). Install and enable the
 FairValid plugin, then open **Plugins → FairValid → Accounts** in your OpenClaw
 Gateway. Choose **Connect** beside `fairvalid` and complete the FairValid browser
-consent. Select your workspace and a Live API key covering the requested
-permissions and an appropriate lifetime spending cap.
+consent. Review the workspace and requested permissions, then choose **Allow connection**.
 
 Start a new agent session and ask “Show my FairValid credit balance.” For
 FairMatch, ask to search and quote leads before approving an exact selection and
@@ -107,7 +108,7 @@ The listing includes email verification and FairMatch and links to the
 
 After installation, open **MCP Servers** to find FairValid. Start the server and
 complete the client's FairValid connection and consent flow before using tools.
-Choose a key with the lead permissions if you want to use FairMatch.
+For an older verification-only connection, reconnect and approve the lead permissions to use FairMatch.
 
 Native marketplace search and installation of version **1.1.0** were verified in
 VS Code **1.145.2** on November 6, 2026. That check did not require signing in to
@@ -177,8 +178,7 @@ items distinct from final results. Unknown or unresolved catch-all is not proof
 of validity; Valid is not a guarantee of inbox delivery.
 
 Both submission tools require a stable `idempotency_key`. On an uncertain
-response, keep the **same selected API-key identity, same key, and unchanged
-input**. Reconnecting to a different API key can create another run even if the
+response, keep the **same connection identity, idempotency key and unchanged input**. Reconnecting to a different API key can create another run even if the
 idempotency key is unchanged. Do not rotate keys or resubmit with a new key just
 to make an uncertain request appear successful.
 
@@ -214,8 +214,7 @@ documented `example.com` fixtures. Sandbox work makes no live provider call and
 spends no verification credits; Test keys cannot read the live balance.
 
 A controlled live acceptance test requires the workspace owner's explicit
-authorization. Stay within the authorized test addresses, workspace, selected
-Live key, and credit limit; live charges and idempotency safeguards still apply.
+authorization. Stay within the authorized test addresses, workspace, connection and credit limit; live charges and idempotency safeguards still apply.
 Do not run live tests automatically, use customer lists as installation fixtures,
 or cancel customer jobs as part of installation tests.
 

@@ -16,9 +16,9 @@ email-verification tools remain separate from the six additional FairMatch tools
   needs both; existing `read`, `submit` and `balance` permissions do not imply them.
 - Existing keys and OAuth grants retain their current permissions. Installing a
   newer plugin cannot add lead scopes to an existing grant. Deliberately reconnect
-  through the client's native OAuth flow and select a key with the needed scopes.
-  Review the intended workspace, permissions and lifetime credit cap at consent.
-- The OpenAI 1.1.0 package explicitly requests `read submit balance leads:read
+  through the client's native OAuth flow and approve the requested lead permissions
+  for the intended workspace. FairValid prepares access automatically.
+- The OpenAI package explicitly requests `read submit balance leads:read
   leads:acquire offline_access` for fresh OAuth authorization. The deployed
   runtime also requests these six scopes at explicit consent when a new client
   authorization omits `scope`. A client explicitly requesting only the old
@@ -26,7 +26,7 @@ email-verification tools remain separate from the six additional FairMatch tools
   scopes. Existing grants and refresh scopes never expand automatically.
   This does not claim a newly completed OAuth grant in every native client.
 - OpenClaw and Hermes expose all six FairMatch tools by default, including unlock,
-  alongside the three verification reads. Acquisition still requires
+  alongside single-email verification and the three verification reads. Acquisition still requires
   `leads:acquire`, a quote and explicit approval of a numerical credit maximum.
   Keep normal approval prompts. Search has `readOnlyHint: false` because it
   performs a search; this is not a read-only tool set. Tool filters never replace
@@ -48,7 +48,7 @@ fallback around a host's tool filter.
 | `fairvalid_quote_leads` | `ids`: 1–50 distinct returned selection IDs. | `maximum_credits`, `key_remaining_credits`, `owned_selection_ids`, unit price. A quote reserves no credits and has no separate quote ID. | `leads:read` |
 | `fairvalid_unlock_leads` | `ids`; integer `maximumCredits` 0–200; `confirm: true`; `idempotency_key`. | Starts or replays the exact batch. Returns `batch_id`, `status`, `completed`, `charged_credits`, `unavailable` and `leads`; live receipts also include `status_url`. | `leads:acquire` |
 | `fairvalid_get_lead_batch` | Actual returned `batch_id`. | Read the original key's batch and verified leads; `working` or `complete`. Honor `retry_after`; poll with backoff from 5 to 30 seconds. | `leads:read` |
-| `fairvalid_get_leads` | Optional `query` and `cursor`. | Up to 100 owned contacts per page in `items`, plus `total` and `next_cursor`. Pass the cursor unchanged; it preserves the initial query and selected key. | `leads:read` |
+| `fairvalid_get_leads` | Optional `query` and `cursor`. | Up to 100 owned contacts per page in `items`, plus `total` and `next_cursor`. Pass the cursor unchanged; it preserves the initial query and connection identity. | `leads:read` |
 
 Search `filters` is an object of supported filter names to string arrays. Query
 text is at most 100 characters. Filter values are at most 150 characters; discover
@@ -115,8 +115,7 @@ must obtain the user's approval before either submission path.
 ## Synthetic sandbox review cases
 
 These are **proposed test cases**, not claimed results. Use a separate direct
-Test-key connection and verify `mode: sandbox` before any submission. OAuth
-selects Live keys and must not be treated as sandbox mode. No real people or
+Test-key connection and verify `mode: sandbox` before any submission. OAuth uses live workspace data and must not be treated as sandbox mode. No real people or
 credit charges are involved in the sandbox fixtures.
 
 | Fixture | Company / title | Expected FairMatch behavior |

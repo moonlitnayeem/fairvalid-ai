@@ -1,0 +1,8 @@
+{
+  "mcp": {
+    "fairvalid": {
+      "type": "remote",
+      "url": "https://mcp.fairvalid.com/mcp"
+    }
+  }
+}

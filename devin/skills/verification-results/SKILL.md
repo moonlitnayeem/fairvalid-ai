@@ -1,20 +1,22 @@
 ---
 name: verification-results
-description: Read FairValid verification job status, paginated results, and workspace credits through an authorized connection. Use when the user wants existing verification results or a balance; this skill never submits or cancels verification jobs.
+description: Verify one authorized email address or read FairValid verification job results and workspace credits. Follow the returned job ID to its result.
 ---
 
-# FairValid verification results
+# FairValid email verification and results
 
-Use only `fairvalid_get_balance`, `fairvalid_get_job` and
-`fairvalid_get_results` for this workflow. Discover the actual tool schemas
-before use and respect the connected workspace and its granted permissions.
-Do not call verification submission or cancellation tools. Do not bypass a
-missing tool or permission with HTTP, shell, another credential or workspace.
+Discover the available FairValid tools and stay within the connected workspace
+and permissions. Use `fairvalid_get_balance` to read credits, `fairvalid_get_job`
+to check job status and `fairvalid_get_results` to read the result.
 
 - Never ask for passwords, keys, authorization codes or tokens in chat.
-- A balance read needs `balance`; job status and results need `read`.
-- Read only the job and results the user requested. Use its returned job ID.
-  If it is missing, ask for the job identifier instead of guessing one.
+- A request for existing results or a balance is read-only. Use the job ID the
+  user supplied or the original submission returned.
+- Only use `fairvalid_verify_email` when the user authorizes checking that
+  specific address. Live checks can use workspace credits. Call once with a
+  stable `idempotency_key`; an uncertain retry must reuse it on the same
+  connection with the exact same input. Save the returned job ID.
+- A single-email check does not authorize a bulk job or cancellation.
 - Poll pending work initially after two seconds, then up to ten seconds;
   honor a returned `retry_after` and stop when the work completes or the user
   stops waiting. Report pending work accurately.

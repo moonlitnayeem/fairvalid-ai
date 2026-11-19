@@ -13,22 +13,20 @@ needed to receive this explanation. This skill does not verify a live connection
 ## Explain setup
 
 FairMatch is FairValid's business lead search and verified work-email feature.
-The plugin also supports reading email-verification jobs, results and credits.
+The plugin can verify an authorized email address and read verification jobs, results and credits.
 Its hosted endpoint is `https://mcp.fairvalid.com/mcp`.
 
 For later connected use, the user installs FairValid in Devin, opens its MCP
 connection, and completes normal browser sign-in and consent on FairValid.
-They choose the intended workspace and an existing Live API key with suitable
-permissions and a lifetime credit cap. Never ask them to paste a key, password,
+They approve the requested permissions for their workspace. FairValid prepares
+the connection automatically and applies available free credits first. Never ask them to paste a key, password,
 authorization code or token into chat. Installing the plugin grants no data
 access and authorizes no spending.
 
-The intended permissions are `read`, `balance`, `leads:read`, `leads:acquire`
-and `offline_access`. They cover three verification read operations and six
-FairMatch operations. Verification submission and cancellation require the
-separate `submit` permission, which this package does not request. Existing
-connections need deliberate consent to add lead permissions. The actual native
-consent screen and connected server are authoritative.
+Fresh connections request `read`, `submit`, `balance`, `leads:read`,
+`leads:acquire` and `offline_access`. A user may ask to verify a specific email
+address after connecting. Older connections need fresh consent for additional
+permissions. This setup skill makes no tool calls.
 
 ## Explain the lead workflow
 
@@ -45,7 +43,7 @@ Newly acquired verified work emails cost **four credits each**. Already-owned
 and unavailable contacts cost zero. Quotes reserve no credits. Search previews
 are not unlocked contacts, and no work email or inbox delivery is guaranteed.
 An unlock accepts 1–50 returned selection IDs and a ceiling of 0–200 credits;
-the workspace balance and selected key's lifetime cap also apply.
+the workspace balance and the connection’s spending cap also apply.
 
 For a concise answer, cover these facts in a few clear paragraphs and link to
 [FairValid's MCP guide](https://fairvalid.com/help/mcp) and

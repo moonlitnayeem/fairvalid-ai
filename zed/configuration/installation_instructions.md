@@ -4,7 +4,7 @@ FairValid verifies email addresses and exposes job status, results, cancellation
 
 This extension uses the pinned `mcp-remote` 0.16.0 bridge and requires a compatible Node.js runtime (20.18.1 is the declared dependency baseline; resolved dependencies may require newer). Zed obtains Node and installs the bridge through its extension API. Connecting can open your browser for normal FairValid OAuth consent.
 
-Sign in to FairValid and select the intended workspace and an existing active Live API key with the requested permissions. The selected key's scopes and spending cap apply. An Owner or Manager can manage keys at https://fairvalid.com/integrations/api-keys. Never paste a password, key, authorization code or token into chat or extension settings.
+Sign in to FairValid, review the workspace and permissions, then choose **Allow connection**. FairValid prepares access automatically. The connection uses available free credits in your workspace first. Manage connections at https://fairvalid.com/integrations/mcp. Never paste a password, key, authorization code or token into chat or extension settings.
 
 If first-time sign-in exceeds Zed's default 60-second timeout, restart FairValid from MCP settings and use the current authorization flow. If needed, set the top-level Zed setting `"context_server_timeout": 300` before restarting; it affects context-server requests generally. Do not keep using an authorization callback from a stopped bridge.
 
@@ -24,8 +24,8 @@ batch status and owned-lead retrieval. The server passed controlled production
 sandbox acceptance on November 6, 2026; native Zed FairMatch execution remains
 unverified.
 Discover actual tool schemas; do not assume absent tools are live. Existing OAuth
-grants retain existing scopes. Deliberately reconnect with an appropriately scoped
-key for `leads:read` and, when acquisition is wanted, `leads:acquire`. Never modify
+grants retain existing scopes. To add `leads:read` or `leads:acquire`, reconnect and approve those
+permissions for the same workspace. Never modify
 stored tokens or bypass a scope denial.
 
 Use `fairvalid_get_lead_filters`, then `fairvalid_search_leads` for the user's

@@ -3,8 +3,8 @@
 # FairValid for Devin
 
 Find business leads with **FairMatch by FairValid**, quote selected contacts,
-unlock verified work emails after confirming a credit ceiling, and read existing
-email-verification jobs, results and credits.
+unlock verified work emails after confirming a credit ceiling, verify a specific
+authorized address, and read verification jobs, results and credits.
 
 Publisher: **FairValid** · Support: [nayeem@fairvalid.com](mailto:nayeem@fairvalid.com)
 
@@ -32,17 +32,17 @@ packaged public documentation and makes no MCP calls or account connection.
 
 For connected use, open FairValid's MCP under **Customize → MCPs** and choose
 **Connect**, or use the CLI's normal `devin mcp login` flow for the installed
-server. Complete browser sign-in and consent on FairValid. Select an existing
-Live key for the intended workspace with suitable permissions and a credit cap.
+server. Sign in to FairValid, review the workspace and permissions, then choose **Allow
+connection**. Available free credits can be used immediately after connection.
 Never paste a key, password or token into chat. The endpoint is
 `https://mcp.fairvalid.com/mcp`; the transport is Streamable HTTP.
 
-The manifest requests `read`, `balance`, `leads:read`, `leads:acquire` and
-`offline_access`. It deliberately omits `submit`, covering the six FairMatch
-operations and three verification reads. The hosted server may still advertise
-all twelve tools; this is an OAuth permission boundary, not a native tool-list
-filter. Verify the actual requested scopes before approving consent. The
-candidate's native OAuth interpretation remains to be tested.
+Fresh connections request `read`, `submit`, `balance`, `leads:read`,
+`leads:acquire` and `offline_access`. Ask Devin to verify a specific authorized
+email address or to search and quote leads. Keep Devin’s tool approvals enabled.
+The hosted server can advertise all twelve tools. Its `submit` permission also
+covers batch submission and cancellation. Connecting, checking a balance or
+requesting one email check does not authorize those other actions.
 
 An existing key or grant does not gain permissions when a plugin is installed
 or updated. Use deliberate reconnect/consent when adding FairMatch. Preserve

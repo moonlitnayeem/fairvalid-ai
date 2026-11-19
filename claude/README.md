@@ -2,7 +2,7 @@
 
 # FairValid for Claude
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **FairValid 1.1.1 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -24,15 +24,13 @@ hosted MCP server and includes separate email-verification and FairMatch skills.
 
 ## Connect your workspace
 
-Complete OAuth on [FairValid](https://fairvalid.com), then select an existing Live
-API key for the intended workspace. The selected key's scopes and lifetime
-spending cap apply. A workspace Owner or Manager can manage keys on the
-[API keys page](https://fairvalid.com/integrations/api-keys). Revoking the selected
-key ends its connections.
+Choose **Connect**, sign in to FairValid and approve the requested access for
+your workspace. FairValid sets up the connection automatically. Email checks and
+FairMatch unlocks use available free credits first. All your FairValid plugins
+share that workspace balance. [Manage connected apps](https://fairvalid.com/integrations/mcp).
 
 Never paste a password, API key, OAuth code, or token into chat. No client secret
-is bundled or required for automatic public client registration. OAuth selects
-Live keys; sandbox verification needs a separate direct Test-key connection.
+is bundled or required for automatic public client registration. OAuth uses live workspace data; sandbox verification needs a separate direct Test-key connection.
 
 For Claude Code 2.1.275 or later, install this package inside a session with:
 
@@ -78,7 +76,7 @@ charge. Cancellation does not reverse charges for completed checks; in-flight
 work may still finish. A spending cap does not add workspace credits.
 
 Both submission tools require a stable `idempotency_key`. If a response is
-uncertain, keep the same selected API-key identity, same idempotency key, and
+uncertain, keep the same connection identity, same idempotency key, and
 unchanged input. Switching credentials or retrying with a new key can create
 another run. Poll accepted jobs with backoff, honor retry hints, and follow the
 results cursor unchanged until all pages have been read.
@@ -93,8 +91,7 @@ Default submission tests use a separate direct Test-key connection and documente
 verification credits; Test keys cannot read the live balance.
 
 A controlled live acceptance test requires the workspace owner's explicit
-authorization. Stay within the authorized test addresses, workspace, selected
-Live key, and credit limit; live charges and idempotency safeguards still apply.
+authorization. Stay within the authorized test addresses, workspace, connection and credit limit; live charges and idempotency safeguards still apply.
 Do not run live tests automatically, use customer lists as installation fixtures,
 or cancel customer jobs as part of installation tests.
 
@@ -130,12 +127,12 @@ discover actual server capabilities and permissions in the connected client.
 
 FairMatch charges four credits per newly acquired verified work email; already-
 owned and unavailable contacts cost zero. Quotes reserve no credits. Preserve the
-same selected API-key identity, ordered IDs, ceiling and idempotency key after an
+same connection identity, ordered IDs, ceiling and idempotency key after an
 uncertain unlock. Do not make new paid batches to conceal uncertainty.
 
 `leads:read` and `leads:acquire` are separate opt-in permissions. Updating a package
-does not expand existing keys or OAuth grants. Deliberately reconnect with an
-appropriately scoped key and review the requested permissions and cap. Installation
+does not expand existing keys or OAuth grants. To add permissions, reconnect and
+approve the new request for the same workspace. Installation
 does not authorize acquisition. Synthetic tests require a separate direct Test-key
 connection; OAuth is Live-only. See the [API/MCP guide](https://github.com/moonlitnayeem/fairvalid-ai/blob/main/docs/fairmatch.md) for
 exact inputs, fixture behavior, scope boundaries and release limits.

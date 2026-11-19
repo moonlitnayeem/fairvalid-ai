@@ -7,8 +7,8 @@ import subprocess
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '1.1.0'
-OPENAI_VERSION = '1.1.1'
+VERSION = '1.1.1'
+OPENAI_VERSION = '1.1.2'
 MCP_URL = 'https://mcp.fairvalid.com/mcp'
 paths = subprocess.check_output(
     ['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
@@ -33,11 +33,13 @@ crate = next(p for p in toml_docs['zed/Cargo.lock']['package'] if p['name'] == '
 assert crate['version'] == VERSION
 assert json_docs['server.json']['remotes'] == [{'type': 'streamable-http', 'url': MCP_URL}]
 
+assert json_docs['examples/kilo.json']['mcp']['fairvalid'] == {'type': 'remote', 'url': MCP_URL}
+
 expected_scopes = ['read', 'submit', 'balance', 'leads:read', 'leads:acquire', 'offline_access']
 auth = json_docs['openai/mcp.json']['mcpServers']['fairvalid']['extensions']['com.openai']['auth']
 assert auth == {'type': 'oauth', 'client': {'mode': 'dcr'}, 'baseScopes': expected_scopes}
 default_tools = [
-    'fairvalid_get_balance', 'fairvalid_get_job', 'fairvalid_get_results',
+    'fairvalid_get_balance', 'fairvalid_get_job', 'fairvalid_get_results', 'fairvalid_verify_email',
     'fairvalid_get_lead_filters', 'fairvalid_search_leads', 'fairvalid_quote_leads',
     'fairvalid_unlock_leads',
     'fairvalid_get_lead_batch', 'fairvalid_get_leads',
@@ -45,13 +47,15 @@ default_tools = [
 assert json_docs['openclaw/.mcp.json']['mcpServers']['fairvalid']['toolFilter']['include'] == default_tools
 hermes = re.findall(r'^        - (fairvalid_[a-z_]+)$', (ROOT / 'examples/hermes.yaml').read_text(), re.M)
 assert hermes == default_tools
+assert json_docs['devin/.devin-plugin/plugin.json']['mcpServers']['fairvalid']['oauthScopes'] == expected_scopes
 assert 'fairvalid_unlock_leads' in default_tools
-assert len(default_tools) == len(set(default_tools)) == 9
+assert len(default_tools) == len(set(default_tools)) == 10
 assert json_docs['openclaw/.mcp.json']['mcpServers']['fairvalid']['auth'] == 'oauth'
 
 skill_paths = [
     'skills/fairmatch-leads/SKILL.md', 'claude/skills/fairmatch-leads/SKILL.md',
     'openai/skills/fairmatch-leads/SKILL.md', 'openclaw/skills/fairmatch-leads/SKILL.md',
+    'devin/skills/fairmatch-leads/SKILL.md',
 ]
 canonical = (ROOT / skill_paths[0]).read_bytes()
 for name in skill_paths:

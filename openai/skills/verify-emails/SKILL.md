@@ -11,11 +11,12 @@ results, account balances, or a successful connection.
 
 ## Connect and establish scope
 
-- For first-time setup, explain that FairValid uses its own OAuth sign-in and
-  that the user selects an existing live API key on FairValid's consent page.
+- For first-time setup, have the user sign in to FairValid and approve the
+  requested permissions for their workspace. Available free credits are ready
+  to use after connection.
   Use the client's native Connect flow. Never ask for an API key, password,
   authorization code, or access token in chat or a tool argument.
-- The selected key determines the workspace, scopes, and spending cap. Ask the
+- The connection uses the approved workspace, permissions and spending controls. Ask the
   user to change the connection if the wrong workspace is selected. There is
   no workspace override argument.
 - Email-verification tools are `fairvalid_verify_email`, `fairvalid_submit_job`,

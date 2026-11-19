@@ -9,10 +9,10 @@ For an authorized installation, Hermes' supported interactive command is:
 hermes mcp add fairvalid --url https://mcp.fairvalid.com/mcp --auth oauth
 ```
 
-Follow Hermes' authorization prompt to sign in at `https://fairvalid.com`, select
-an existing Live API key and workspace, and review permissions. No OAuth client
+Follow Hermes’ authorization prompt to sign in at `https://fairvalid.com`. Review
+the workspace and requested permissions, then choose **Allow connection**. No OAuth client
 secret or API key is needed in chat. FairValid supports automatic public client
-registration and S256 PKCE. The selected key's workspace, scopes and cap apply.
+registration and S256 PKCE. The connection uses the workspace’s available credits and existing spending limits.
 
 An equivalent configuration with the complete FairMatch workflow is in [hermes.yaml](hermes.yaml).
 Merge its `fairvalid` entry into the active Hermes profile's `mcp_servers` map;
@@ -21,8 +21,8 @@ replacing it. Hermes uses `url` and `auth: oauth`, without a transport `type` in
 user configuration. The catalog manifest uses a different schema.
 
 The tool filter limits exposure, not OAuth scopes. Review the grant at FairValid
-consent. Select `fairvalid_get_balance`, `fairvalid_get_job`, and `fairvalid_get_results`
-for initial use. Only enable `fairvalid_verify_email`, `fairvalid_submit_job`, and
+consent. Single-email verification uses `fairvalid_verify_email` after the user authorizes
+the address. Only enable `fairvalid_submit_job` and
 `fairvalid_cancel_job` when those actions are wanted. Review the selection through
 `hermes mcp configure fairvalid`. To reconnect an existing OAuth server, use
 `hermes mcp login fairvalid`. Start a fresh session or use `/reload-mcp` after setup.
@@ -31,7 +31,7 @@ for initial use. Only enable `fairvalid_verify_email`, `fairvalid_submit_job`, a
 authenticated business operation succeeded. For an authorized functional check,
 ask Hermes to read the FairValid balance only, with balance scope. This spends
 no verification credits. Do not submit customer addresses or cancel customer jobs
-as an installation test. OAuth connections use Live keys; sandbox submissions
+as an installation test. OAuth connections use live workspace data; sandbox submissions
 need a separate direct Test-key connection and documented `example.com` fixtures.
 
 The skill can be inspected and installed independently:
@@ -66,7 +66,7 @@ Sources:
 ## FairMatch update
 
 The YAML exposes all six FairMatch tools, including `fairvalid_unlock_leads`,
-alongside the three verification reads: nine tools in total. The five non-unlock
+alongside single-email verification and three verification reads, for ten tools in total. The five non-unlock
 lead tools require `leads:read`; unlock requires `leads:acquire`. Search can
 perform a remote search and is not marked as a pure read. Review both permissions
 at consent. Existing grants do not expand on package updates. Use

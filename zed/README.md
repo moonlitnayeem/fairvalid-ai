@@ -1,6 +1,6 @@
 # FairValid for Zed
 
-> **FairValid 1.1.0:** FairMatch API/MCP passed controlled production sandbox
+> **FairValid 1.1.1 onboarding update.** FairMatch API/MCP passed controlled production sandbox
 > acceptance on November 6, 2026. Provider listings and native-client acceptance
 > are tracked separately. Discover the connected server capabilities before use;
 > acquisition requires an explicit numerical credit limit and confirmation.
@@ -26,7 +26,7 @@ For development installation, use Zed's **Install Dev Extension** action and sel
 
 Enabling or connecting the context server can download the pinned bridge and open a browser for OAuth. No endpoint, credentials or arbitrary executable can be overridden in this extension's settings. No key is embedded in the package.
 
-Sign in to FairValid, choose the intended workspace and an active Live API key with the requested permissions, and review consent. The key's workspace, scopes and spending cap govern the connection. Do not paste passwords, keys, codes or tokens into chat. Revoking the backing key ends its connections.
+Sign in to FairValid, review the workspace and requested permissions, then choose **Allow connection**. FairValid sets up access automatically and uses available free credits first. Do not paste passwords, keys, codes or tokens into chat. Revoking the backing key ends its connections.
 
 The first OAuth sign-in can take longer than Zed's default 60-second request timeout. If Zed shows **Context server request timeout**, restart FairValid from Zed's MCP settings and complete any newly opened authorization flow. A stopped bridge's earlier callback may no longer be available. If more time is needed, optionally set the top-level Zed setting `"context_server_timeout": 300` before restarting; this timeout setting applies to context-server requests generally, not only FairValid. No credential or endpoint change is needed.
 
@@ -68,8 +68,8 @@ The same connection can expose six additional hosted tools from the deployed
 `fairvalid_quote_leads`, `fairvalid_unlock_leads`, `fairvalid_get_lead_batch` and
 `fairvalid_get_leads`. Discover the actual schemas before use. Lead reads require
 opt-in `leads:read`; unlock requires `leads:acquire`. Existing keys/grants do not
-gain these permissions on update. Reconnect deliberately with an appropriately
-scoped key and review the consent page; do not edit stored OAuth tokens.
+gain these permissions on update. To add lead permissions, reconnect and approve the new request for the
+intended workspace.
 
 Search and quote first, then obtain explicit approval of the selected people and
 a numerical maximum credit spend. Unlock uses 1–50 selection IDs,

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "fairvalid",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Verify emails, find FairMatch leads, quote and unlock verified work emails, and inspect workspace jobs and credits.",
   "author": {
     "name": "FairValid",
@@ -25,7 +25,7 @@
       "interface": {
         "displayName": "FairValid",
         "shortDescription": "Verify emails and find leads",
-        "longDescription": "FairValid connects your workspace for email verification and FairMatch lead discovery. Verify authorized addresses, track asynchronous jobs and results, and inspect credits. With separately approved leads:read and leads:acquire permissions, find business leads, quote 1\u201350 selected people, and unlock verified work emails only after you confirm a numerical maximum credit spend. Preserve the exact selection and idempotency key on uncertain retries, poll the returned batch, and retrieve owned leads. Existing grants do not gain lead permissions automatically; reconnect with an appropriately scoped Live key when you want FairMatch. OAuth is live-only; synthetic tests require a separate direct Test-key connection. The plugin does not send outreach or imply a mailbox-delivery guarantee. The API/MCP passed controlled production sandbox acceptance; native-client testing and provider review remain separate.",
+        "longDescription": "FairValid connects your workspace for email verification and FairMatch lead discovery. Verify authorized addresses, track asynchronous jobs and results, and inspect credits. Sign in to FairValid and approve access for your workspace. FairValid sets up the connection automatically. With the requested lead permissions, find business leads, quote 1\u201350 selected people, and unlock verified work emails only after you confirm a numerical maximum credit spend. Preserve the exact selection and idempotency key on uncertain retries, poll the returned batch, and retrieve owned leads. Existing grants do not gain lead permissions automatically; reconnect and approve the new permissions when you want FairMatch. OAuth is live-only; synthetic tests require a separate direct Test-key connection. The plugin does not send outreach or imply a mailbox-delivery guarantee. The API/MCP passed controlled production sandbox acceptance; native-client testing and provider review remain separate.",
         "developerName": "FairValid",
         "category": "Productivity",
         "capabilities": [
@@ -101,7 +101,7 @@
         }
       },
       "publication": {
-        "release_notes": "OpenAI package 1.1.1 aligns review metadata to exactly five positive and three negative scenarios and removes pricing from the listing description. FairMatch tools, OAuth scopes and runtime remain unchanged from 1.1.0. Production API/MCP sandbox acceptance and native-client review remain separate."
+        "release_notes": "Updated sign-in guidance for automatic FairValid workspace access. The plugin uses the same hosted MCP endpoint, requested permissions and tool confirmations."
       }
     }
   }
